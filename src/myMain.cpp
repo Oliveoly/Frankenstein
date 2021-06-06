@@ -3,18 +3,34 @@
 #include "Character.h"
 #include <iostream>
 #include "Ennemy.h"
+#include <list>
+#include "PowerUp.h"
 
 
-//dimensions de la fenêtre
+//largeur de la fenêtre
 int width = 1000;
+//hauteur de la fenêtre
 int height = 600;
+//liste des pointeurs vers les ennemis
+std::list<Ennemy*> ennemies;
+//iterateur de la liste
+std::list<Ennemy*>::iterator it;
+//liste des pointeurs vers les powerups
+std::list<PowerUp*> powerups;
+//iterateur de la liste
+std::list<PowerUp*>::iterator itp;
 
 
 int myMain()
 {
     //ne peuvent être instancié avant la boucle main, sinon erreur fatale
     Character frank(0, 0, 20);
-    Ennemy knight(100, 100, 20);
+    Ennemy knight1(100, 100, 20);
+    Ennemy knight2(150, 100, 20);
+    ennemies.push_back(&knight1);
+    ennemies.push_back(&knight2);
+    PowerUp meat(100, 50);
+    powerups.push_back(&meat);
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");
     app.setFramerateLimit(60);
@@ -30,14 +46,21 @@ int myMain()
             }
         }
 
+
         frank.handle_keyboard();
-        knight.update_sprite();
+        for (it = ennemies.begin(); it != ennemies.end(); ++it)
+        {
+            (*it)->update_sprite();
+        }
+        meat.update_sprite();
         
-        sf::CircleShape cercle = frank.get_shape();
-        cercle.setFillColor(sf::Color::Red); //l'attribut color n'est pas transmis -> pas vraiment un attribut de la classe ?
-        app.draw(cercle);
+        
         app.draw(frank.get_sprite());
-        app.draw(knight.get_sprite());
+        app.draw(meat.get_sprite());
+        for (it = ennemies.begin(); it != ennemies.end(); ++it)
+        {
+            app.draw((*it)->get_sprite());
+        }
         app.display();
         app.clear();
     }

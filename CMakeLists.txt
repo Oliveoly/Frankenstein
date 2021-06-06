@@ -24,11 +24,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/zeux/pugixml.git
     GIT_TAG v1.10
 )
-
 FetchContent_MakeAvailable(pugixml)
-
-add_subdirectory(mainLauncher)
-add_subdirectory(src)
 
 #FetchContent_Declare(
 #    box2d
@@ -36,8 +32,11 @@ add_subdirectory(src)
 #    GIT_TAG origin/master
 #)
 #FetchContent_MakeAvailable(box2d)
-#add_subdirectory(mainLauncher)
-#add_subdirectory(src)
+
+add_subdirectory(mainLauncher)
+add_subdirectory(src)
+
+
 
 
 ###################################################################################################

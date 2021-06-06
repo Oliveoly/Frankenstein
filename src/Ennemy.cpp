@@ -1,9 +1,9 @@
 #include "Ennemy.h"
 #include <iostream>
 
-Ennemy::Ennemy(double x, double y, double size) : x{ x }, y{ y }, size{ size }
+Ennemy::Ennemy(double x, double y, double size) : size{ size }
 {
-    shape.setPosition(x, y);
+    collider.setPosition(cd::Vector2<float>(x, y));
     //attention !!! adresse complete, ne marche que pour moi...
     if (!texture.loadFromFile("C:/Users/user/Documents/COURS/Cplusplus/PROJET/Frankenstein/Ressources/ennemy.png"))
     {
@@ -15,12 +15,12 @@ Ennemy::Ennemy(double x, double y, double size) : x{ x }, y{ y }, size{ size }
 
 void Ennemy::move(int dir_x, int dir_y)
 {
-    x = x + dir_x;
-    y = y + dir_y;
+    set_x(std::min((float)width, std::max(0.f, get_x() + dir_x)));
+    set_y(std::min((float)height, std::max(0.f, get_y() + dir_y)));
 }
 
 
 void Ennemy::update_sprite()
 {
-    sprite.setPosition(x, y);
+    sprite.setPosition(get_x(), get_y());
 }

@@ -2,9 +2,8 @@
 #include <iostream>
 #include <CollisionDetection.hpp>
 
-PowerUp::PowerUp(double x, double y)
+PowerUp::PowerUp(double x, double y) : Element(x, y)
 {
-    collider.setPosition(cd::Vector2<float>(x, y));
     //attention !!! adresse complete, ne marche que pour moi...
     if (!texture.loadFromFile("C:/Users/user/Documents/COURS/Cplusplus/PROJET/Frankenstein/Ressources/meat.png"))
     {

@@ -1,6 +1,6 @@
 #include "myMain.h"
 #include <SFML/Graphics.hpp>
-#include "Character.h"
+#include "Hero.h"
 #include <iostream>
 #include "Ennemy.h"
 #include <list>
@@ -24,7 +24,7 @@ std::list<PowerUp*>::iterator itp;
 int myMain()
 {
     //ne peuvent être instancié avant la boucle main, sinon erreur fatale
-    Character frank(0, 0, 20);
+    Hero frank(0, 0, 20);
     Ennemy knight1(100, 100, 20);
     Ennemy knight2(150, 100, 20);
     ennemies.push_back(&knight1);

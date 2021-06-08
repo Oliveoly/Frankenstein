@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <../Collider2D/include/CollisionDetection.hpp>
+#include "Commandes.h"
 
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
@@ -50,11 +51,16 @@ void Hero::move(int dir_x, int dir_y)
 
 void Hero::handle_keyboard()
 {
-    Command buttonUp = new MoveUp();
+    MoveUpCommand* buttonUp_ = new MoveUpCommand();
+    MoveDownCommand* buttonDown_;
+    MoveLeftCommand* buttonLeft_;
+    MoveRightCommand* buttonRight_;
+    AttackCommand* buttonAttack_;
+    PowerUpCommand* buttonPower_;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        move(0, -speed);
+        buttonUp_->execute(*this,speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {

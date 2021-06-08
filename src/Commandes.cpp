@@ -3,7 +3,7 @@
 class Command {
 public:
 	virtual ~Command() {}
-	virtual void execute(Character chara) = 0;
+	virtual void execute(Character& chara) = 0;
 };
 class MoveUpCommand : public Command {
 	virtual void execute(Character chara) { moveup( chara); }
@@ -29,3 +29,5 @@ class AttackCommand : public Command {
 class PowerUpCommand : public Command {
 	virtual void execute() { powerup(); }
 };
+
+

@@ -77,7 +77,7 @@ void Hero::handle_keyboard()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
 
-        std::cout << "AAAAAAAAA" << std::endl;
+        buttonAttack_->execute(*this, speed);
         std::cout << fsm.execute(Triggers::Attack) << std::endl;
     }
 

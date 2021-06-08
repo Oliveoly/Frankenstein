@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include <iostream>
 class Command {
 public:
 	virtual ~Command() {}
@@ -48,7 +49,10 @@ class AttackCommand : public Command {
 public:
 	AttackCommand() {};
 	virtual void execute(Character& chara, int speed) { attack(chara); }
-	void attack(Character& chara) {};
+	void attack(Character& chara) {
+		std::cout << "AAAAAAAAA" << std::endl;
+		
+	};
 };
 class PowerUpCommand : public Command {
 public:

@@ -1,11 +1,12 @@
 #include "Hero.h"
 #include <iostream>
+#include <conio.h>
 #include <../Collider2D/include/CollisionDetection.hpp>
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
     //attention !!! adresse complete, ne marche que pour moi...
-    if (!texture.loadFromFile("../../Ressources/perso.png"))
+    if (!texture.loadFromFile("../../Ressources/perso2.png"))
     {
         std::cout << "Erreur lors du chargement de perso.png" << std::endl;
     }
@@ -48,6 +49,7 @@ void Hero::move(int dir_x, int dir_y)
 
 void Hero::handle_keyboard()
 {
+    
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {

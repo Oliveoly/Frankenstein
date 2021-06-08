@@ -7,6 +7,7 @@
 #include "PowerUp.h"
 
 
+
 //largeur de la fenêtre
 int width = 1000;
 //hauteur de la fenêtre
@@ -23,6 +24,8 @@ std::list<PowerUp*>::iterator itp;
 
 int myMain()
 {
+    
+    
     //ne peuvent être instancié avant la boucle main, sinon erreur fatale
     Hero frank(0, 0, 20);
     Ennemy knight1(100, 100, 20);

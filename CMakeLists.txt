@@ -26,12 +26,10 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pugixml)
 
-#FetchContent_Declare(
-#    box2d
-#    GIT_REPOSITORY https://github.com/erincatto/box2d.git
-#    GIT_TAG origin/master
-#)
-#FetchContent_MakeAvailable(box2d)
+ADD_LIBRARY(Collider2D STATIC IMPORTED)
+SET_TARGET_PROPERTIES(Collider2D PROPERTIES
+    IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/Collider2D/lib/Collider2D-d.lib)
+
 
 add_subdirectory(mainLauncher)
 add_subdirectory(src)

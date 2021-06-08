@@ -7,7 +7,7 @@ class Character : public Element
 public:
 	Character(double x, double y);
 	int get_speed() { return speed; }
-	void move(int x, int y);
+	virtual void move(int x, int y) = 0;
 
 
 

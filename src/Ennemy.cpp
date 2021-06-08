@@ -23,3 +23,10 @@ void Ennemy::update_sprite()
     if(anim.x == 3){    sprite.setTextureRect(sf::IntRect(32, anim.y * 64, 32, 64)); }
     else {              sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64)); }
 }
+
+
+void Ennemy::move(int dir_x, int dir_y)
+{
+    set_x(std::min((float)width, std::max(0.f, get_x() + dir_x)));
+    set_y(std::min((float)height, std::max(0.f, get_y() + dir_y)));
+}

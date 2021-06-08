@@ -10,6 +10,7 @@
 
 
 
+
 extern std::list<Ennemy*> ennemies;
 extern std::list<Ennemy*>::iterator it;
 extern std::list<PowerUp*> powerups;

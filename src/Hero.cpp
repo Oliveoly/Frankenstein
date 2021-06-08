@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <../Collider2D/include/CollisionDetection.hpp>
 
+
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
     //attention !!! adresse complete, ne marche que pour moi...
@@ -49,7 +50,7 @@ void Hero::move(int dir_x, int dir_y)
 
 void Hero::handle_keyboard()
 {
-    
+    Command buttonUp = new MoveUp();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {

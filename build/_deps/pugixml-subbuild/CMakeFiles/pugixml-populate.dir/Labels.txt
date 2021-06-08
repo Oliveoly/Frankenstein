@@ -1,0 +1,14 @@
+# Target labels
+ pugixml-populate
+# Source files and their labels
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/pugixml-populate
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/3af4f80bc8516726f523dab6ab60d3ad/pugixml-populate.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/622a847b6319fd0b7486c3d33b44cb5e/pugixml-populate-complete.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-install.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-mkdir.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-download.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-update.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-patch.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-configure.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-build.rule
+C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/94be5b9deeebbcb46777fdf6936b2224/pugixml-populate-test.rule

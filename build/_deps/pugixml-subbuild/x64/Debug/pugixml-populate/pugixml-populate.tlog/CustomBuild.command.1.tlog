@@ -1,0 +1,162 @@
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-build
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/tmp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/tmp/pugixml-populate-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-UPDATE.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/tmp/pugixml-populate-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\94BE5B9DEEEBBCB46777FDF6936B2224\PUGIXML-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\622A847B6319FD0B7486C3D33B44CB5E\PUGIXML-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E make_directory C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/Debug/pugixml-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E touch C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/pugixml-populate-prefix/src/pugixml-populate-stamp/Debug/pugixml-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKEFILES\3AF4F80BC8516726F523DAB6AB60D3AD\PUGIXML-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DOVACO\GITHUB\FRANKENSTEIN\FRANKENSTEIN\BUILD\_DEPS\PUGIXML-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild -BC:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild --check-stamp-file C:/Users/dovaco/github/frankenstein/Frankenstein/build/_deps/pugixml-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

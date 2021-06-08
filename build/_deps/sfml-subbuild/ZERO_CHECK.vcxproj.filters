@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\sfml-subbuild\CMakeFiles\876404218b032c69904cd0a6a976563c\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{4FDA165A-D85F-357D-9BF8-CF48927F804F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

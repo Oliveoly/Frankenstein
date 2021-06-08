@@ -4,9 +4,9 @@
 Ennemy::Ennemy(double x, double y, double size) : Character(x, y), size{ size }
 {
     //attention !!! adresse complete, ne marche que pour moi...
-    if (!texture.loadFromFile("C:/Users/user/Documents/COURS/Cplusplus/PROJET/Frankenstein/Ressources/ennemy.png"))
+    if (!texture.loadFromFile("C:/Users/dovaco/github/frankenstein/Frankenstein/Ressources/ennemy.png"))
     {
-        std::cout << "Erreur lors du chargement de ennemy.png" << std::endl;
+        std::cout << "Erreur lors du chargement de ennemy.png1234" << std::endl;
     }
     texture.setSmooth(true);
     sprite.setTexture(texture);

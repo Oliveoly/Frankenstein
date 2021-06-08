@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/googletest"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/e81bd46c158e1b7aeefb62c9db2baf49/googletest.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/64490f706de5c1ab2574d765ba9aece0/googletest-complete.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-install.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-download.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-update.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-patch.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-configure.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-build.rule"
+		},
+		{
+			"file" : "C:/Users/dovaco/github/frankenstein/Frankenstein/build/googletest-download/CMakeFiles/daf05fb2b5354ee35765b8589f1c3b90/googletest-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"googletest"
+		],
+		"name" : "googletest"
+	}
+}

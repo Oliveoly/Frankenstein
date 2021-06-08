@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <CollisionDetection.hpp>
+#include <../Collider2D/include/CollisionDetection.hpp>
 #include <list>
 
 extern int width;

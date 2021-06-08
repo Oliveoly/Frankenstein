@@ -12,7 +12,8 @@ class PowerUp : public Element
 public:
 	PowerUp(double x_init, double y_init);
 	void update_sprite();
-
+	
+	~PowerUp();
 private:
 	
 };

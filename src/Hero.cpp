@@ -91,6 +91,11 @@ void Hero::handle_keyboard()
                 /*
                 Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
                 */
+                sprite.setColor(sf::Color::Green);
+                speed+=3;
+                (*itp)->~PowerUp();
+                powerups.remove(*itp);
+                break;
             }
         }
     }

@@ -68,7 +68,10 @@ int myMain()
         
         
         app.draw(frank.get_sprite());
-        app.draw(meat.get_sprite());
+        for (itp = powerups.begin(); itp != powerups.end(); itp++){
+            app.draw((*itp)->get_sprite());
+        }
+        
         for (it = ennemies.begin(); it != ennemies.end(); ++it)
         {
             app.draw((*it)->get_sprite());

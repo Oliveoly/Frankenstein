@@ -20,6 +20,8 @@ std::list<Ennemy*>::iterator it;
 std::list<PowerUp*> powerups;
 //iterateur de la liste
 std::list<PowerUp*>::iterator itp;
+sf::Clock timer;
+
 
 
 int myMain()
@@ -51,11 +53,18 @@ int myMain()
 
 
         frank.handle_keyboard();
-        for (it = ennemies.begin(); it != ennemies.end(); ++it)
+
+        if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
-            (*it)->update_sprite();
+            for (it = ennemies.begin(); it != ennemies.end(); ++it)
+            {
+                (*it)->update_sprite();
+            }
+            meat.update_sprite();
+            timer.restart();
         }
-        meat.update_sprite();
+
+        
         
         
         app.draw(frank.get_sprite());

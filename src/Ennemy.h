@@ -9,6 +9,7 @@ class Ennemy : public Character
 {
 public:
 	Ennemy(double x_init, double y_init, double size_init);
+	~Ennemy();
 	void update_sprite();
 	void move(int x, int y);
 
@@ -23,6 +24,7 @@ private:
 		Up
 	};
 	sf::Vector2i anim;
+	sf::Clock dirTimer;
 
 
 };

@@ -35,6 +35,7 @@ int myMain()
     ennemies.push_back(&knight1);
     ennemies.push_back(&knight2);
     PowerUp meat(100, 50);
+    PowerUp meat2(200, 50);
     powerups.push_back(&meat);
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");

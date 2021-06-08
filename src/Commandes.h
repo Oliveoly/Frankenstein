@@ -50,7 +50,8 @@ public:
 	AttackCommand() {};
 	virtual void execute(Character& chara, int speed) { attack(chara); }
 	void attack(Character& chara) {
-		std::cout << "AAAAAAAAA" << std::endl;
+
+		chara.attack();
 		
 	};
 };

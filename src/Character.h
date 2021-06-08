@@ -8,6 +8,7 @@ public:
 	Character(double x, double y);
 	int get_speed() { return speed; }
 	virtual void move(int x, int y) = 0;
+	virtual void attack() = 0;
 
 
 

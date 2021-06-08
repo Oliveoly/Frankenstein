@@ -1,2 +1,0 @@
-C:\Users\dovaco\github\frankenstein\Frankenstein\build\src\Debug\src.pdb
-C:\Users\dovaco\github\frankenstein\Frankenstein\build\src\src.dir\Debug\src.pdb

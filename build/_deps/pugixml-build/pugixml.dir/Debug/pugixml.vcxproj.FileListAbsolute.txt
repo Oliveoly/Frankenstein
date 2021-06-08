@@ -1,2 +1,0 @@
-C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build\Debug\pugixml.pdb
-C:\Users\dovaco\github\frankenstein\Frankenstein\build\_deps\pugixml-build\pugixml.dir\Debug\pugixml.pdb

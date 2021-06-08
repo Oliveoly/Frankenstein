@@ -13,6 +13,7 @@ Ennemy::Ennemy(double x, double y, double size) : Character(x, y), size{ size }
     sprite.setTexture(texture);
     anim.x = 0;
     anim.y = Dir::Down;
+    maxHP = 100;
 };
 
 Ennemy::~Ennemy()
@@ -67,4 +68,9 @@ void Ennemy::move(int dir_x, int dir_y)
     set_y(std::min((float)height, std::max(0.f, get_y() + dir_y)));
 
     
+}
+
+void Ennemy::attack()
+{
+
 }

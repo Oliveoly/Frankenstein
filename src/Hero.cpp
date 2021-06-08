@@ -76,9 +76,26 @@ void Hero::handle_keyboard()
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
+        //buttonAttack_->execute(*this, speed);
+        cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
 
-        buttonAttack_->execute(*this, speed);
-        std::cout << fsm.execute(Triggers::Attack) << std::endl;
+        it = ennemies.begin();
+        while (it != ennemies.end())
+        {
+            //std::cout << collider.getPosition().x << " , " << collider.getPosition().y << " , " << collider.getRadius() << std::endl;
+            //std::cout << (*it)->get_collider().getPosition().x << " , " << (*it)->get_collider().getPosition().y << " , " << (*it)->get_collider().getRadius() << std::endl;
+            if (attack_area.intersects((*it)->get_collider()))
+            {
+                std::cout << "bonk !" << std::endl;
+                /*
+                Tuer l'ennemi
+                */
+                (*it)->~Ennemy();
+                ennemies.remove(*it);
+                break;
+            }
+            it++;
+        }
     }
 
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -120,4 +137,27 @@ void Hero::switch_anim(int id)
     default:
         break;
     }
+}
+
+void Hero::attack()
+{
+    /*
+    cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
+    
+    while (it != ennemies.end())
+    {
+        //std::cout << collider.getPosition().x << " , " << collider.getPosition().y << " , " << collider.getRadius() << std::endl;
+        //std::cout << (*it)->get_collider().getPosition().x << " , " << (*it)->get_collider().getPosition().y << " , " << (*it)->get_collider().getRadius() << std::endl;
+        if (attack_area.intersects((*it)->get_collider()))
+        {
+            std::cout << "bonk !" << std::endl;
+            
+            //Tuer l'ennemi
+            
+            ennemies.erase(it);
+            delete (*it);
+        }
+        ++it;
+    }
+    */
 }

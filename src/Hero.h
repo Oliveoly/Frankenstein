@@ -23,6 +23,7 @@ public:
 	void handle_keyboard();
 	void move(int x, int y);
 	void update_sprite();
+	void attack();
 
 private:
 	double size;

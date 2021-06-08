@@ -12,6 +12,7 @@ public:
 	~Ennemy();
 	void update_sprite();
 	void move(int x, int y);
+	void attack();
 
 
 private:

@@ -3,15 +3,15 @@
 class Command {
 public:
 	virtual ~Command() {}
-	virtual void execute(Hero& chara, int speed) = 0;
+	virtual void execute(Character& chara, int speed) = 0;
 };
 class MoveUpCommand : public Command {
 	public:
 		MoveUpCommand() {
 
 		};
-	virtual void execute(Hero& chara, int speed) { moveUp(chara, speed); }
-	void moveUp(Hero& chara, int speed) {
+	virtual void execute(Character& chara, int speed) { moveUp(chara, speed); }
+	void moveUp(Character& chara, int speed) {
 		chara.move(0, -speed);
 	};
 
@@ -19,33 +19,40 @@ class MoveUpCommand : public Command {
 
 class MoveDownCommand : public Command {
 public:
-	virtual void execute(Character chara, int speed) { moveDown(chara, speed); }
-	void moveDown(Character chara, int speed) {
+	MoveDownCommand() {};
+	virtual void execute(Character& chara, int speed) { moveDown(chara, speed); }
+	void moveDown(Character& chara, int speed) {
 		chara.move(0,speed);
 	};
 };
 
 class MoveRightCommand : public Command {
 public:
-	virtual void execute(Character chara, int speed) { moveRight(chara, speed); }
-	void moveRight(Character chara, int speed) {
+	MoveRightCommand() {};
+	virtual void execute(Character& chara, int speed) { moveRight(chara, speed); }
+	void moveRight(Character& chara, int speed) {
 		chara.move(speed, 0);
 	};
 };
 
 class MoveLeftCommand : public Command {
 public:
-	virtual void execute(Character chara) { moveLeft(chara); }
-	void moveLeft(Character chara);
+	MoveLeftCommand() {};
+	virtual void execute(Character& chara, int speed) { moveLeft(chara, speed); }
+	void moveLeft(Character& chara, int speed) {
+		chara.move(-speed, 0);
+	};
 
 };
 class AttackCommand : public Command {
 public:
-	virtual void execute(Character chara) { attack(chara); }
-	void attack(Character chara);
+	AttackCommand() {};
+	virtual void execute(Character& chara, int speed) { attack(chara); }
+	void attack(Character& chara) {};
 };
 class PowerUpCommand : public Command {
 public:
-	virtual void execute(Character chara) { powerup(chara); }
-	void powerup(Character chara);
+	PowerUpCommand() {};
+	virtual void execute(Character& chara, int speed) { powerup(chara); }
+	void powerup(Character& chara) {};
 };

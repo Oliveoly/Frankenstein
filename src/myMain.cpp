@@ -13,13 +13,13 @@ int width = 1000;
 //hauteur de la fenêtre
 int height = 600;
 //liste des pointeurs vers les ennemis
-std::list<Ennemy*> ennemies;
+std::vector<Ennemy*> ennemies;
 //iterateur de la liste
-std::list<Ennemy*>::iterator it;
+std::vector<Ennemy*>::iterator it;
 //liste des pointeurs vers les powerups
-std::list<PowerUp*> powerups;
+std::vector<PowerUp*> powerups;
 //iterateur de la liste
-std::list<PowerUp*>::iterator itp;
+std::vector<PowerUp*>::iterator itp;
 sf::Clock timer;
 
 
@@ -37,6 +37,7 @@ int myMain()
     PowerUp meat(100, 50);
     PowerUp meat2(200, 50);
     powerups.push_back(&meat);
+
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");
     app.setFramerateLimit(60);

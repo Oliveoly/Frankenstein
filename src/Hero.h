@@ -11,10 +11,10 @@
 
 
 
-extern std::list<Ennemy*> ennemies;
-extern std::list<Ennemy*>::iterator it;
-extern std::list<PowerUp*> powerups;
-extern std::list<PowerUp*>::iterator itp;
+extern std::vector<Ennemy*> ennemies;
+extern std::vector<Ennemy*>::iterator it;
+extern std::vector<PowerUp*> powerups;
+extern std::vector<PowerUp*>::iterator itp;
 
 class Hero : public Character
 {

@@ -5,6 +5,9 @@
 #include "Commandes.h"
 
 
+extern int width = 1000;
+extern int height = 600;
+
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
     //attention !!! adresse complete, ne marche que pour moi...
@@ -31,7 +34,7 @@ void Hero::move(int dir_x, int dir_y)
     set_x( std::min((float)width, std::max(0.f, get_x() + dir_x)) );
     // 0 < y + dir_y < 600
     set_y( std::min((float)height, std::max(0.f, get_y() + dir_y)) );
-
+    std::vector<Ennemy*>::iterator it;
     for (it = ennemies.begin(); it != ennemies.end(); ++it)
     {
         //std::cout << collider.getPosition().x << " , " << collider.getPosition().y << " , " << collider.getRadius() << std::endl;
@@ -78,7 +81,7 @@ void Hero::handle_keyboard()
     {
         //buttonAttack_->execute(*this, speed);
         cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
-
+        std::vector<Ennemy*>::iterator it;
         it = ennemies.begin();
         while (it != ennemies.end())
         {
@@ -99,6 +102,7 @@ void Hero::handle_keyboard()
 
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
+        std::vector<PowerUp*>::iterator itp;
         for (itp = powerups.begin(); itp != powerups.end(); ++itp)
         {
             if (collider.intersects((*itp)->get_collider()))

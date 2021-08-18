@@ -8,12 +8,8 @@
 #include "fsm.h"
 
 
-
-
 extern std::vector<Ennemy*> ennemies;
-extern std::vector<Ennemy*>::iterator it;
 extern std::vector<PowerUp*> powerups;
-extern std::vector<PowerUp*>::iterator itp;
 
 class Hero : public Character
 {

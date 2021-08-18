@@ -7,27 +7,23 @@
 
 
 
-//largeur de la fenêtre
-int width = 1000;
-//hauteur de la fenêtre
-int height = 600;
 //liste des pointeurs vers les ennemis
 std::vector<Ennemy*> ennemies;
-//iterateur de la liste
-std::vector<Ennemy*>::iterator it;
 //liste des pointeurs vers les powerups
 std::vector<PowerUp*> powerups;
-//iterateur de la liste
-std::vector<PowerUp*>::iterator itp;
-sf::Clock timer;
 
 
 
 int myMain()
 {
-    
-    
-    //ne peuvent être instancié avant la boucle main, sinon erreur fatale
+
+    //largeur de la fenêtre
+    int width = 1000;
+    //hauteur de la fenêtre
+    int height = 600;
+
+    sf::Clock timer;
+
     Hero frank(0, 0, 20);
     Ennemy knight1(100, 100, 20);
     Ennemy knight2(150, 100, 20);
@@ -59,6 +55,7 @@ int myMain()
         //TODO : généraliser le update_sprite à tous les éléments
         if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
+            std::vector<Ennemy*>::iterator it;
             for (it = ennemies.begin(); it != ennemies.end(); ++it)
             {
                 (*it)->update_sprite();
@@ -72,10 +69,12 @@ int myMain()
         //affichage des sprites mis à jour
         //TODO : généraliser le draw à tous les elements
         app.draw(frank.get_sprite());
+        std::vector<PowerUp*>::iterator itp;
         for (itp = powerups.begin(); itp != powerups.end(); itp++){
             app.draw((*itp)->get_sprite());
         }
-        
+        std::vector<Ennemy*>::iterator it;
+
         for (it = ennemies.begin(); it != ennemies.end(); ++it)
         {
             app.draw((*it)->get_sprite());

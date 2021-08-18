@@ -90,7 +90,6 @@ void Hero::handle_keyboard()
                 /*
                 Tuer l'ennemi
                 */
-                (*it)->~Ennemy();
                 ennemies.erase(it);
                 break;
             }
@@ -110,7 +109,6 @@ void Hero::handle_keyboard()
                 */
                 sprite.setColor(sf::Color::Green);
                 speed+=3;
-                (*itp)->~PowerUp();
                 powerups.erase(itp);
                 break;
             }

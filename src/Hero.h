@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <list>
 #include <conio.h>
 #include "Ennemy.h"
 #include "PowerUp.h"

@@ -3,7 +3,6 @@
 #include "Hero.h"
 #include <iostream>
 #include "Ennemy.h"
-#include <list>
 #include "PowerUp.h"
 
 
@@ -56,6 +55,8 @@ int myMain()
 
         frank.handle_keyboard();
 
+        //mise à jour des sprites : passage à la prochaine frame toutes les 250ms
+        //TODO : généraliser le update_sprite à tous les éléments
         if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
             for (it = ennemies.begin(); it != ennemies.end(); ++it)
@@ -68,7 +69,8 @@ int myMain()
 
         
         
-        
+        //affichage des sprites mis à jour
+        //TODO : généraliser le draw à tous les elements
         app.draw(frank.get_sprite());
         for (itp = powerups.begin(); itp != powerups.end(); itp++){
             app.draw((*itp)->get_sprite());

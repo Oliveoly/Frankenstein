@@ -25,15 +25,16 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
         });
 };
 
-void Hero::move(int dir_x, int dir_y)
+void Hero::move(double dir_x, double dir_y)
 {
     int old_x = get_x();
     int old_y = get_y();
 
     // 0 < x + dir_x < 1000
-    set_x( std::min((float)width, std::max(0.f, get_x() + dir_x)) );
+    set_x( std::min((double)width, std::max(0.0, get_x() + dir_x)) );
     // 0 < y + dir_y < 600
-    set_y( std::min((float)height, std::max(0.f, get_y() + dir_y)) );
+    set_y( std::min((double)height, std::max(0.0, get_y() + dir_y)) );
+
     std::vector<Ennemy*>::iterator it;
     for (it = ennemies.begin(); it != ennemies.end(); ++it)
     {
@@ -119,8 +120,6 @@ void Hero::handle_keyboard()
         }
     }
     
-    
-    update_sprite();
 }
 
 void Hero::update_sprite()

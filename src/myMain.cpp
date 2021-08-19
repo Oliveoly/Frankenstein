@@ -11,7 +11,7 @@
 std::vector<Ennemy*> ennemies;
 //liste des pointeurs vers les powerups
 std::vector<PowerUp*> powerups;
-
+Hero* frank_ptr;
 
 
 int myMain()
@@ -25,6 +25,7 @@ int myMain()
     sf::Clock timer;
 
     Hero frank(0, 0, 20);
+    frank_ptr = &frank;
     Ennemy knight1(100, 100, 20);
     Ennemy knight2(150, 100, 20);
     ennemies.push_back(&knight1);

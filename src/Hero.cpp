@@ -4,7 +4,7 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Commandes.h"
 
-
+// PAS BIEN ce sont elles les vraies variables globales, mais on veut que ça soit celles du myMain !
 extern int width = 1000;
 extern int height = 600;
 
@@ -41,7 +41,7 @@ void Hero::move(int dir_x, int dir_y)
         //std::cout << (*it)->get_collider().getPosition().x << " , " << (*it)->get_collider().getPosition().y << " , " << (*it)->get_collider().getRadius() << std::endl;
         if (collider.intersects((*it)->get_collider()))
         {
-            std::cout << "aie !" << std::endl;
+            std::cout << "collision hero -> zombie" << std::endl;
             /*
             Prendre des dégâts, et devenir invincible pendant quelques secondes.
             */

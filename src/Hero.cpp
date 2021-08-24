@@ -15,6 +15,8 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
     {
         std::cout << "Erreur lors du chargement de perso.png" << std::endl;
     }
+    maxHP = 100;
+    currentHP = 100;
     texture.setSmooth(true);
     sprite.setTexture(texture);
 
@@ -48,6 +50,8 @@ void Hero::move(double dir_x, double dir_y)
             */
             set_x(old_x);
             set_y(old_y);
+            //
+            receive_damage(1);
         }
     }
     
@@ -161,4 +165,14 @@ void Hero::attack()
         ++it;
     }
     */
+}
+
+void Hero::receive_damage(int damage)
+{
+    if (invincibility_timer.getElapsedTime().asMilliseconds() > 2000)
+    {
+        currentHP -= damage;
+        invincibility_timer.restart();
+    }
+    
 }

@@ -23,6 +23,7 @@ private:
 	};
 	sf::Vector2i anim;
 	sf::Clock dirTimer;
+	sf::Clock atkTimer;
 
 
 };

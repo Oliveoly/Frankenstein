@@ -9,7 +9,8 @@ public:
 	int get_speed() { return speed; }
 	virtual void move(double x, double y) = 0;
 	virtual void attack() = 0;
-
+	int get_maxHP() { return maxHP; };
+	int get_currentHP() { return currentHP; };
 
 
 protected:

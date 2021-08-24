@@ -19,9 +19,11 @@ public:
 	void move(double x, double y);
 	void update_sprite();
 	void attack();
+	void receive_damage(int damage);
 
 private:
 	double size;
+	sf::Clock invincibility_timer;
 	void switch_anim(int id);
 	enum Anim
 	{

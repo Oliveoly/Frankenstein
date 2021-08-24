@@ -4,9 +4,7 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Commandes.h"
 
-// PAS BIEN ce sont elles les vraies variables globales, mais on veut que ça soit celles du myMain !
-extern int width = 1000;
-extern int height = 600;
+extern std::vector<Element*> elements;
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
@@ -37,6 +35,20 @@ void Hero::move(double dir_x, double dir_y)
     // 0 < y + dir_y < 600
     set_y( std::min((double)height, std::max(0.0, get_y() + dir_y)) );
 
+    std::vector<Element*>::iterator it;
+    for (it = elements.begin(); it != elements.end(); ++it)
+    {
+        Ennemy* test = dynamic_cast<Ennemy*>(*it);
+        if (test && collider.intersects((*it)->get_collider()))
+        {
+            std::cout << "collision hero -> zombie" << std::endl;
+            //Prendre des dégâts, et devenir invincible pendant quelques secondes.
+            set_x(old_x);
+            set_y(old_y);
+            receive_damage(1);
+        }
+    }
+    /*
     std::vector<Ennemy*>::iterator it;
     for (it = ennemies.begin(); it != ennemies.end(); ++it)
     {
@@ -45,15 +57,13 @@ void Hero::move(double dir_x, double dir_y)
         if (collider.intersects((*it)->get_collider()))
         {
             std::cout << "collision hero -> zombie" << std::endl;
-            /*
-            Prendre des dégâts, et devenir invincible pendant quelques secondes.
-            */
+            //Prendre des dégâts, et devenir invincible pendant quelques secondes.
             set_x(old_x);
             set_y(old_y);
-            //
             receive_damage(1);
         }
     }
+    */
     
 }
 
@@ -86,19 +96,16 @@ void Hero::handle_keyboard()
     {
         //buttonAttack_->execute(*this, speed);
         cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
-        std::vector<Ennemy*>::iterator it;
-        it = ennemies.begin();
-        while (it != ennemies.end())
+        std::vector<Element*>::iterator it;
+        it = elements.begin();
+        while (it != elements.end())
         {
-            //std::cout << collider.getPosition().x << " , " << collider.getPosition().y << " , " << collider.getRadius() << std::endl;
-            //std::cout << (*it)->get_collider().getPosition().x << " , " << (*it)->get_collider().getPosition().y << " , " << (*it)->get_collider().getRadius() << std::endl;
-            if (attack_area.intersects((*it)->get_collider()))
+            Ennemy* test = dynamic_cast<Ennemy*>(*it);
+            if (test && attack_area.intersects((*it)->get_collider()))
             {
                 std::cout << "bonk !" << std::endl;
-                /*
-                Tuer l'ennemi
-                */
-                ennemies.erase(it);
+                //Tuer l'ennemi
+                elements.erase(it);
                 break;
             }
             it++;
@@ -107,10 +114,11 @@ void Hero::handle_keyboard()
 
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        std::vector<PowerUp*>::iterator itp;
-        for (itp = powerups.begin(); itp != powerups.end(); ++itp)
+        std::vector<Element*>::iterator it;
+        for (it = elements.begin(); it != elements.end(); ++it)
         {
-            if (collider.intersects((*itp)->get_collider()))
+            PowerUp* test = dynamic_cast<PowerUp*>(*it);
+            if (test && collider.intersects((*it)->get_collider()))
             {
                 std::cout << "nom nom !" << std::endl;
                 /*
@@ -118,7 +126,7 @@ void Hero::handle_keyboard()
                 */
                 sprite.setColor(sf::Color::Green);
                 speed+=3;
-                powerups.erase(itp);
+                elements.erase(it);
                 break;
             }
         }

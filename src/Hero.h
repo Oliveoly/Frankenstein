@@ -7,10 +7,6 @@
 #include "Character.h"
 #include "fsm.h"
 
-
-extern std::vector<Ennemy*> ennemies;
-extern std::vector<PowerUp*> powerups;
-
 class Hero : public Character
 {
 public:

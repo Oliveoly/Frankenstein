@@ -8,28 +8,23 @@
 #include "PowerUp.h"
 #include "Fireball.h"
 
-//TODO : généraliser en une seule liste Elements
-//liste des pointeurs vers les ennemis
-std::vector<Ennemy*> ennemies;
-//liste des pointeurs vers les powerups
-std::vector<PowerUp*> powerups;
-//liste des pointeurs vers les fireballs
-std::vector<Fireball*> fireballs;
+//la liste des éléments du jeu : joueur, ennemis, power-ups, pièges...
+std::vector<Element*> elements;
+//la liste des éléments créés lors d'une itération sur la liste ci-dessus
+//ils seront ajoutés à elements à la fin de l'itération, et new_elements est alors vidée
+std::vector<Element*> new_elements;
+//largeur de la fenêtre
+int width = 1000;
+//hauteur de la fenêtre
+int height = 600;
 
 Hero* frank_ptr;
 
-
 int myMain()
 {
+    
 
-    //largeur de la fenêtre
-    int width = 1000;
-    //hauteur de la fenêtre
-    int height = 600;
-
-    std::vector<Ennemy*>::iterator ite;
-    std::vector<PowerUp*>::iterator itp;
-    std::vector<Fireball*>::iterator itx;
+    std::vector<Element*>::iterator it;
 
     sf::Clock timer;
 
@@ -39,13 +34,14 @@ int myMain()
     Walker green1(100, 100, 20);
     Walker green2(150, 100, 20);
     Firebreather red1(200, 200, 20);
-    ennemies.push_back(&green1);
-    ennemies.push_back(&green2);
-    ennemies.push_back(&red1);
     PowerUp meat(100, 50);
     PowerUp meat2(200, 50);
-    powerups.push_back(&meat);
-    powerups.push_back(&meat2);
+
+    elements.push_back(&green1);
+    elements.push_back(&green2);
+    elements.push_back(&red1);
+    elements.push_back(&meat);
+    elements.push_back(&meat2);
 
     //textes
     sf::Font font;
@@ -74,52 +70,31 @@ int myMain()
 
         //gestion du comportement du joueur et des ennemis
         frank.handle_keyboard();
-        for (ite = ennemies.begin(); ite != ennemies.end(); ++ite)
+        for (it = elements.begin(); it != elements.end(); it++)
         {
-            (*ite)->action();
-        }
-        for (itx = fireballs.begin(); itx != fireballs.end(); ++itx)
-        {
-            (*itx)->action();
+            (*it)->action();
         }
 
+        //ajout des nouveaux éléments créés lors de la boucle précédente à la liste elements
+        elements.insert(elements.end(), new_elements.begin(), new_elements.end());
+        new_elements.clear();
+
         //mise à jour des sprites : passage à la prochaine frame toutes les 250ms
-        //TODO : généraliser le update_sprite à tous les éléments
         frank.update_sprite();
         if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
-            for (ite = ennemies.begin(); ite != ennemies.end(); ++ite)
+            for (it = elements.begin(); it != elements.end(); it++)
             {
-                (*ite)->update_sprite();
+                (*it)->update_sprite();
             }
-            for (itp = powerups.begin(); itp != powerups.end(); ++itp)
-            {
-                (*itp)->update_sprite();
-            }
-            for (itx = fireballs.begin(); itx != fireballs.end(); ++itx)
-            {
-                (*itx)->update_sprite();
-            }
-            //ball.update_sprite();
             timer.restart();
         }
         
-
-        
         //affichage des sprites après mise à jour de leur frame/position
-        //TODO : généraliser le draw à tous les elements
         app.draw(frank.get_sprite());
-
-        for (itp = powerups.begin(); itp != powerups.end(); itp++){
-            app.draw((*itp)->get_sprite());
-        }
-        for (ite = ennemies.begin(); ite != ennemies.end(); ++ite)
+        for (it = elements.begin(); it != elements.end(); it++)
         {
-            app.draw((*ite)->get_sprite());
-        }
-        for (itx = fireballs.begin(); itx != fireballs.end(); ++itx)
-        {
-            app.draw((*itx)->get_sprite());
+            app.draw((*it)->get_sprite());
         }
 
         //affichage des éléments textuels

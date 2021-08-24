@@ -19,6 +19,7 @@ public:
 	void set_x(float new_x) { collider.setPosition(cd::Vector2<float>(new_x, collider.getPosition().y)); };
 	void set_y(float new_y) { collider.setPosition(cd::Vector2<float>(collider.getPosition().x, new_y)); };
 	virtual void update_sprite();
+	virtual void action();
 	cd::CircleCollision get_collider() { return collider; }
 
 

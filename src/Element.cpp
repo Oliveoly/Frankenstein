@@ -15,5 +15,10 @@ Element::Element(double x, double y)
 
 void Element::update_sprite()
 {
-    sprite.setPosition(get_x(), get_y());
+    //sprite.setPosition(get_x(), get_y());
+}
+
+void Element::action()
+{
+
 }

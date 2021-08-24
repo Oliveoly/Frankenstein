@@ -4,6 +4,7 @@
 #include "Hero.h"
 
 extern Hero* frank_ptr;
+extern std::vector<Element*> elements;
 
 Ennemy::Ennemy(double x, double y, double size) : Character(x, y), size{ size }
 {
@@ -12,7 +13,7 @@ Ennemy::Ennemy(double x, double y, double size) : Character(x, y), size{ size }
 
 Ennemy::~Ennemy()
 {
-    std::cout << "ennemi détruit" << std::endl;
+    //std::cout << "ennemi détruit" << std::endl;
 }
 
 void Ennemy::update_sprite()
@@ -41,7 +42,20 @@ void Ennemy::move(double dir_x, double dir_y)
     }
     
 
-    std::vector<Ennemy*>::iterator it;
+    std::vector<Element*>::iterator it;
+    for (it = elements.begin(); it != elements.end(); ++it)
+    {
+        //on vérifie que l'ennemi ne rentre dans aucun autre ennemi (différent de lui-même)
+        Ennemy* test = dynamic_cast<Ennemy*>(*it);
+        if (test && collider.intersects((*it)->get_collider()) && (this != (*it)))
+        {
+            std::cout << "collision zombie -> zombie" << std::endl;
+            set_x(old_x);
+            set_y(old_y);
+        }
+    }
+
+    /*
     for (it = ennemies.begin(); it != ennemies.end(); ++it)
     {
         //on vérifie que l'ennemi ne rentre dans aucun autre ennemi (différent de lui-même)
@@ -52,6 +66,7 @@ void Ennemy::move(double dir_x, double dir_y)
             set_y(old_y);
         }
     }
+    */
 }
 
 void Ennemy::attack()

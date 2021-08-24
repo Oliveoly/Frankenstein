@@ -5,6 +5,10 @@
 #include "Fireball.h"
 
 extern std::vector<Fireball*> fireballs;
+extern std::vector<Element*> elements;
+extern std::vector<Element*> new_elements;
+
+
 
 Firebreather::Firebreather(double x, double y, double size) : Ennemy(x, y, size)
 {
@@ -45,7 +49,7 @@ void Firebreather::action()
     {
         std::cout << "lancer fireball" << std::endl;
         Fireball* fireball = new Fireball(get_x(), get_y(), anim.y);
-        fireballs.push_back(fireball);
+        new_elements.push_back(fireball); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
         atkTimer.restart();
     }
 

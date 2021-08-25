@@ -13,8 +13,8 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
     {
         std::cout << "Erreur lors du chargement de perso.png" << std::endl;
     }
-    maxHP = 100;
-    currentHP = 100;
+    maxHP = 15;
+    currentHP = 15;
     texture.setSmooth(true);
     sprite.setTexture(texture);
 
@@ -46,6 +46,9 @@ void Hero::move(double dir_x, double dir_y)
             set_x(old_x);
             set_y(old_y);
             receive_damage(1);
+            if (currentHP <= 0) {
+                std::cout << "Game Over!" << std::endl;
+            }
         }
     }
     /*

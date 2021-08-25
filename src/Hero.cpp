@@ -8,7 +8,6 @@ extern std::vector<Element*> elements;
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
-    //attention !!! adresse complete, ne marche que pour moi...
     if (!texture.loadFromFile("../../Ressources/scientist.png"))
     {
         std::cout << "Erreur lors du chargement de perso.png" << std::endl;
@@ -17,6 +16,7 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
     currentHP = 15;
     texture.setSmooth(true);
     sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
 
     fsm.add_transitions(
         {
@@ -51,22 +51,6 @@ void Hero::move(double dir_x, double dir_y)
             }
         }
     }
-    /*
-    std::vector<Ennemy*>::iterator it;
-    for (it = ennemies.begin(); it != ennemies.end(); ++it)
-    {
-        //std::cout << collider.getPosition().x << " , " << collider.getPosition().y << " , " << collider.getRadius() << std::endl;
-        //std::cout << (*it)->get_collider().getPosition().x << " , " << (*it)->get_collider().getPosition().y << " , " << (*it)->get_collider().getRadius() << std::endl;
-        if (collider.intersects((*it)->get_collider()))
-        {
-            std::cout << "collision hero -> zombie" << std::endl;
-            //Prendre des dégâts, et devenir invincible pendant quelques secondes.
-            set_x(old_x);
-            set_y(old_y);
-            receive_damage(1);
-        }
-    }
-    */
     
 }
 
@@ -76,7 +60,6 @@ void Hero::handle_keyboard()
     
     MoveUpCommand buttonUp_  ;
     MoveDownCommand buttonDown_;
-    
     MoveLeftCommand buttonLeft_;
     MoveRightCommand buttonRight_ ;
     AttackCommand buttonAttack_ ;
@@ -90,7 +73,6 @@ void Hero::handle_keyboard()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         anim.y = 0;
-         
         buttonDown_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))

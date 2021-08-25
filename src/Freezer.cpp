@@ -1,17 +1,17 @@
-#include "Firebreather.h"
+#include "Freezer.h"
 #include <iostream>
 #include "Commandes.h"
 #include "Hero.h"
-#include "Fireball.h"
+#include "Puddle.h"
 
 extern std::vector<Element*> elements;
 extern std::vector<Element*> new_elements;
 
 
 
-Firebreather::Firebreather(double x, double y, double size) : Ennemy(x, y, size)
+Freezer::Freezer(double x, double y, double size) : Ennemy(x, y, size)
 {
-    if (!texture.loadFromFile("../../Ressources/zombieRed.png"))
+    if (!texture.loadFromFile("../../Ressources/zombieBlue.png"))
     {
         std::cout << "Erreur lors du chargement de zombie.png" << std::endl;
     }
@@ -24,7 +24,7 @@ Firebreather::Firebreather(double x, double y, double size) : Ennemy(x, y, size)
     maxHP = 100;
 };
 
-void Firebreather::update_sprite()
+void Freezer::update_sprite()
 {
 
     anim.x = (anim.x + 1) % 4;
@@ -34,9 +34,8 @@ void Firebreather::update_sprite()
 
 }
 
-void Firebreather::action()
+void Freezer::action()
 {
-
     sprite.setPosition(get_x(), get_y());
 
     if (dirTimer.getElapsedTime().asSeconds() >= 2)
@@ -45,16 +44,16 @@ void Firebreather::action()
         dirTimer.restart();
     }
 
-    if (atkTimer.getElapsedTime().asSeconds() >= 3)
+    if (atkTimer.getElapsedTime().asSeconds() >= 1)
     {
-        std::cout << "lancer fireball" << std::endl;
-        Fireball* fireball= new Fireball(get_x(), get_y(), anim.y);
-        new_elements.push_back(fireball); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
+        Puddle* puddle = new Puddle(get_x(), get_y());
+        new_elements.push_back(puddle);
         atkTimer.restart();
     }
 
+
     MoveUpCommand buttonUp_;
-    MoveDownCommand buttonDown_ ;
+    MoveDownCommand buttonDown_;
     MoveLeftCommand buttonLeft_;
     MoveRightCommand buttonRight_;
 
@@ -73,4 +72,5 @@ void Firebreather::action()
         buttonDown_.execute(*this, speed);
         break;
     }
+
 }

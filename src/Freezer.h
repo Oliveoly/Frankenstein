@@ -4,18 +4,15 @@
 #include <iostream>
 #include "Ennemy.h"
 
-class Firebreather : public Ennemy
+class Freezer : public Ennemy
 {
 public:
-	Firebreather(double x_init, double y_init, double size_init);
+	Freezer(double x_init, double y_init, double size_init);
 	void update_sprite();
 	void action();
-
 
 private:
 	double size;
 	sf::Clock dirTimer;
 	sf::Clock atkTimer;
-
-
 };

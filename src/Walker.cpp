@@ -12,6 +12,7 @@ Walker::Walker(double x, double y, double size) : Ennemy(x, y, size)
     speed = 1;
     texture.setSmooth(true);
     sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
     anim.x = 0;
     anim.y = Dir::Down;
     maxHP = 100;

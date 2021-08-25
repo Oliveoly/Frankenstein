@@ -14,6 +14,7 @@ Fireball::Fireball(double x, double y, int dir) : Element(x, y)
     }
     texture.setSmooth(true);
     sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(anim.x * 64, anim.y * 32, 64, 32));
 
     switch (dir)
     {

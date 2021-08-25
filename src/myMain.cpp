@@ -6,7 +6,7 @@
 #include "Walker.h"
 #include "Firebreather.h"
 #include "PowerUp.h"
-#include "Fireball.h"
+#include "Freezer.h"
 
 //la liste des éléments du jeu : joueur, ennemis, power-ups, pièges...
 std::vector<Element*> elements;
@@ -34,12 +34,14 @@ int myMain()
     Firebreather red1(200, 200, 20);
     PowerUp meat(100, 50);
     PowerUp meat2(200, 50);
+    Freezer blue1(100, 300, 20);
 
     elements.push_back(&green1);
     elements.push_back(&green2);
     elements.push_back(&red1);
     elements.push_back(&meat);
     elements.push_back(&meat2);
+    elements.push_back(&blue1);
 
     //textes
     sf::Font font;

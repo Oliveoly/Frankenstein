@@ -48,15 +48,15 @@ void Firebreather::action()
     if (atkTimer.getElapsedTime().asSeconds() >= 3)
     {
         std::cout << "lancer fireball" << std::endl;
-        Fireball* fireball = new Fireball(get_x(), get_y(), anim.y);
+        Fireball* fireball = &Fireball(get_x(), get_y(), anim.y);
         new_elements.push_back(fireball); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
         atkTimer.restart();
     }
 
-    MoveUpCommand* buttonUp_ = new MoveUpCommand();
-    MoveDownCommand* buttonDown_ = new MoveDownCommand();
-    MoveLeftCommand* buttonLeft_ = new MoveLeftCommand();
-    MoveRightCommand* buttonRight_ = new MoveRightCommand();
+    MoveUpCommand* buttonUp_ = &MoveUpCommand();
+    MoveDownCommand* buttonDown_ = &MoveDownCommand();
+    MoveLeftCommand* buttonLeft_ = &MoveLeftCommand();
+    MoveRightCommand* buttonRight_ = &MoveRightCommand();
 
     switch (anim.y)
     {

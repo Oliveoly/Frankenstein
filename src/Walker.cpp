@@ -38,10 +38,10 @@ void Walker::action()
         dirTimer.restart();
     }
 
-    MoveUpCommand* buttonUp_ = new MoveUpCommand();
-    MoveDownCommand* buttonDown_ = new MoveDownCommand();
-    MoveLeftCommand* buttonLeft_ = new MoveLeftCommand();
-    MoveRightCommand* buttonRight_ = new MoveRightCommand();
+    MoveUpCommand* buttonUp_ = &MoveUpCommand();
+    MoveDownCommand* buttonDown_ = &MoveDownCommand();
+    MoveLeftCommand* buttonLeft_ = &MoveLeftCommand();
+    MoveRightCommand* buttonRight_ = &MoveRightCommand();
 
     switch (anim.y)
     {

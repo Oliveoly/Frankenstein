@@ -16,6 +16,7 @@ public:
 	void update_sprite();
 	void attack();
 	void receive_damage(int damage);
+	int get_modif();
 
 private:
 	double size;
@@ -39,5 +40,6 @@ private:
 		Attack
 	};
 	FSM::Fsm<States, States::Normal, Triggers> fsm;	
+	int modif = 0;
 };
 

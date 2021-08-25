@@ -17,4 +17,12 @@ protected:
 	double speed = 3;
 	int maxHP;
 	int currentHP;
+	enum Dir
+	{
+		Down,
+		Left,
+		Right,
+		Up
+	};
+	sf::Vector2i anim;
 };

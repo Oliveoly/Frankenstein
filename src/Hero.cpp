@@ -9,7 +9,7 @@ extern std::vector<Element*> elements;
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
     //attention !!! adresse complete, ne marche que pour moi...
-    if (!texture.loadFromFile("../../Ressources/perso2.png"))
+    if (!texture.loadFromFile("../../Ressources/scientist.png"))
     {
         std::cout << "Erreur lors du chargement de perso.png" << std::endl;
     }
@@ -72,6 +72,8 @@ void Hero::move(double dir_x, double dir_y)
 
 void Hero::handle_keyboard()
 {
+    sprite.setPosition(get_x(), get_y());
+    
     MoveUpCommand buttonUp_  ;
     MoveDownCommand buttonDown_;
     
@@ -82,19 +84,23 @@ void Hero::handle_keyboard()
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
+        anim.y = 3;
         buttonUp_.execute(*this,speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
+        anim.y = 0;
          
         buttonDown_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
+        anim.y = 2;
         buttonRight_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
+        anim.y = 1;
         buttonLeft_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -126,11 +132,11 @@ void Hero::handle_keyboard()
             if (test && collider.intersects((*it)->get_collider()))
             {
                 std::cout << "nom nom !" << std::endl;
-                /*
-                Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
-                */
+                //Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
+                //TODO : différents buffs en fonction du power-up
                 sprite.setColor(sf::Color::Green);
-                speed+=3;
+                speed+=1;
+                modif++;
                 elements.erase(it);
                 break;
             }
@@ -141,7 +147,8 @@ void Hero::handle_keyboard()
 
 void Hero::update_sprite()
 {
-    sprite.setPosition(get_x(), get_y());
+    anim.x = (anim.x + 1) % 4;
+    sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
 }
 
 void Hero::switch_anim(int id)
@@ -188,4 +195,9 @@ void Hero::receive_damage(int damage)
         invincibility_timer.restart();
     }
     
+}
+
+int Hero::get_modif()
+{
+    return modif;
 }

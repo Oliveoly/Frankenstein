@@ -18,14 +18,7 @@ public:
 
 private:
 	double size;
-	enum Dir
-	{
-		Down,
-		Left, 
-		Right,
-		Up
-	};
-	sf::Vector2i anim;
+	
 	sf::Clock dirTimer;
 
 

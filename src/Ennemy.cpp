@@ -37,11 +37,9 @@ void Ennemy::move(double dir_x, double dir_y)
         std::cout << "collision zombie -> hero" << std::endl;
         set_x(old_x);
         set_y(old_y);
-        //
         frank_ptr->receive_damage(1);
     }
     
-
     std::vector<Element*>::iterator it;
     for (it = elements.begin(); it != elements.end(); ++it)
     {
@@ -54,19 +52,6 @@ void Ennemy::move(double dir_x, double dir_y)
             set_y(old_y);
         }
     }
-
-    /*
-    for (it = ennemies.begin(); it != ennemies.end(); ++it)
-    {
-        //on vérifie que l'ennemi ne rentre dans aucun autre ennemi (différent de lui-même)
-        if (collider.intersects((*it)->get_collider()) && (this != (*it) ) )
-        {
-            std::cout << "collision zombie -> zombie" << std::endl;
-            set_x(old_x);
-            set_y(old_y);
-        }
-    }
-    */
 }
 
 void Ennemy::attack()

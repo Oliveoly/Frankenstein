@@ -22,8 +22,6 @@ Hero* frank_ptr;
 
 int myMain()
 {
-    
-
     std::vector<Element*>::iterator it;
 
     sf::Clock timer;
@@ -53,6 +51,11 @@ int myMain()
     text_HP.setFont(font);
     text_HP.setCharacterSize(24);
     text_HP.setFillColor(sf::Color::White);
+    sf::Text text_danger;
+    text_danger.setFont(font);
+    text_danger.setCharacterSize(24);
+    text_danger.setFillColor(sf::Color::Red);
+    text_danger.setPosition(700, 0);
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");
     app.setFramerateLimit(60);
@@ -80,9 +83,9 @@ int myMain()
         new_elements.clear();
 
         //mise à jour des sprites : passage à la prochaine frame toutes les 250ms
-        frank.update_sprite();
         if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
+            frank.update_sprite();
             for (it = elements.begin(); it != elements.end(); it++)
             {
                 (*it)->update_sprite();
@@ -99,7 +102,9 @@ int myMain()
 
         //affichage des éléments textuels
         text_HP.setString(std::to_string(frank.get_currentHP()) + "/" + std::to_string(frank.get_maxHP()));
+        text_danger.setString("monstrification : " + std::to_string(frank.get_modif()) + " / 10");
         app.draw(text_HP);
+        app.draw(text_danger);
 
         app.display();
         app.clear();

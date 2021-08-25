@@ -69,30 +69,30 @@ void Hero::move(double dir_x, double dir_y)
 
 void Hero::handle_keyboard()
 {
-    MoveUpCommand *buttonUp_ = &MoveUpCommand() ;
-    MoveDownCommand *buttonDown_= &MoveDownCommand();
+    MoveUpCommand buttonUp_  ;
+    MoveDownCommand buttonDown_;
     
-    MoveLeftCommand* buttonLeft_ = &MoveLeftCommand();
-    MoveRightCommand* buttonRight_ =&MoveRightCommand();
-    AttackCommand* buttonAttack_ = &AttackCommand();
-    PowerUpCommand* buttonPower_ = &PowerUpCommand();
+    MoveLeftCommand buttonLeft_;
+    MoveRightCommand buttonRight_ ;
+    AttackCommand buttonAttack_ ;
+    PowerUpCommand buttonPower_ ;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        buttonUp_->execute(*this,speed);
+        buttonUp_.execute(*this,speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
          
-        buttonDown_->execute(*this, speed);
+        buttonDown_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        buttonRight_->execute(*this, speed);
+        buttonRight_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        buttonLeft_->execute(*this, speed);
+        buttonLeft_.execute(*this, speed);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {

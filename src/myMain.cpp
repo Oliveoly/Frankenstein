@@ -58,6 +58,13 @@ int myMain()
     text_danger.setCharacterSize(24);
     text_danger.setFillColor(sf::Color::Red);
     text_danger.setPosition(700, 0);
+    sf::Text text_GameOver;
+    text_GameOver.setFont(font);
+    text_GameOver.setCharacterSize(50);
+    text_GameOver.setFillColor(sf::Color::White);
+    text_GameOver.setPosition(350, 350);
+    
+    
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");
     app.setFramerateLimit(60);
@@ -103,10 +110,14 @@ int myMain()
         }
 
         //affichage des éléments textuels
-        text_HP.setString(std::to_string(frank.get_currentHP()) + "/" + std::to_string(frank.get_maxHP()));
+        text_HP.setString(std::to_string(std::max(frank.get_currentHP(), 0)) + "/" + std::to_string(frank.get_maxHP()));
         text_danger.setString("monstrification : " + std::to_string(frank.get_modif()) + " / 10");
+        if (frank.get_currentHP()<=0) {
+            text_GameOver.setString("Vous etes mort!");
+        }
         app.draw(text_HP);
         app.draw(text_danger);
+        app.draw(text_GameOver);
 
         app.display();
         app.clear();

@@ -56,71 +56,74 @@ void Hero::move(double dir_x, double dir_y)
 
 void Hero::handle_keyboard()
 {
-    sprite.setPosition(get_x(), get_y());
-    
-    MoveUpCommand buttonUp_  ;
-    MoveDownCommand buttonDown_;
-    MoveLeftCommand buttonLeft_;
-    MoveRightCommand buttonRight_ ;
-    AttackCommand buttonAttack_ ;
-    PowerUpCommand buttonPower_ ;
+    if (currentHP > 0) {
+        sprite.setPosition(get_x(), get_y());
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-    {
-        anim.y = 3;
-        buttonUp_.execute(*this,speed);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    {
-        anim.y = 0;
-        buttonDown_.execute(*this, speed);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        anim.y = 2;
-        buttonRight_.execute(*this, speed);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        anim.y = 1;
-        buttonLeft_.execute(*this, speed);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    {
-        //buttonAttack_->execute(*this, speed);
-        cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
-        std::vector<Element*>::iterator it;
-        it = elements.begin();
-        while (it != elements.end())
+        MoveUpCommand buttonUp_;
+        MoveDownCommand buttonDown_;
+        MoveLeftCommand buttonLeft_;
+        MoveRightCommand buttonRight_;
+        AttackCommand buttonAttack_;
+        PowerUpCommand buttonPower_;
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            Ennemy* test = dynamic_cast<Ennemy*>(*it);
-            if (test && attack_area.intersects((*it)->get_collider()))
-            {
-                std::cout << "bonk !" << std::endl;
-                //Tuer l'ennemi
-                elements.erase(it);
-                break;
-            }
-            it++;
+            anim.y = 3;
+            buttonUp_.execute(*this, speed);
         }
-    }
-
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        std::vector<Element*>::iterator it;
-        for (it = elements.begin(); it != elements.end(); ++it)
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
-            PowerUp* test = dynamic_cast<PowerUp*>(*it);
-            if (test && collider.intersects((*it)->get_collider()))
+            anim.y = 0;
+            buttonDown_.execute(*this, speed);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            anim.y = 2;
+            buttonRight_.execute(*this, speed);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            anim.y = 1;
+            buttonLeft_.execute(*this, speed);
+        }
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        {
+            //buttonAttack_->execute(*this, speed);
+            cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
+            std::vector<Element*>::iterator it;
+            it = elements.begin();
+            while (it != elements.end())
             {
-                std::cout << "nom nom !" << std::endl;
-                //Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
-                //TODO : différents buffs en fonction du power-up
-                sprite.setColor(sf::Color::Green);
-                speed+=1;
-                modif++;
-                elements.erase(it);
-                break;
+                Ennemy* test = dynamic_cast<Ennemy*>(*it);
+                if (test && attack_area.intersects((*it)->get_collider()))
+                {
+                    std::cout << "bonk !" << std::endl;
+                    //Tuer l'ennemi
+                    elements.erase(it);
+                    break;
+                }
+                it++;
+            }
+        }
+
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            std::vector<Element*>::iterator it;
+            for (it = elements.begin(); it != elements.end(); ++it)
+            {
+                PowerUp* test = dynamic_cast<PowerUp*>(*it);
+                if (test && collider.intersects((*it)->get_collider()))
+                {
+                    std::cout << "nom nom !" << std::endl;
+                    //Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
+                    //TODO : différents buffs en fonction du power-up
+                    sprite.setColor(sf::Color::Green);
+                    speed += 1;
+                    modif++;
+                    elements.erase(it);
+                    break;
+                }
             }
         }
     }
@@ -129,8 +132,8 @@ void Hero::handle_keyboard()
 
 void Hero::update_sprite()
 {
-    anim.x = (anim.x + 1) % 4;
-    sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
+    anim.x = (anim.x + 1) % 3;
+    sprite.setTextureRect(sf::IntRect(anim.x * 48, anim.y * 48, 48, 48));
 }
 
 void Hero::switch_anim(int id)
@@ -171,13 +174,20 @@ void Hero::attack()
 
 void Hero::receive_damage(int damage)
 {
-    if (invincibility_timer.getElapsedTime().asMilliseconds() > 2000)
+    if (invincibility_timer.getElapsedTime().asMilliseconds() > 1000)
     {
         currentHP -= damage;
         invincibility_timer.restart();
+        if (currentHP<=0) {
+            
+        std::cout << "GameOver" << std::endl;
+        
+        }
     }
     
 }
+
+
 
 int Hero::get_modif()
 {

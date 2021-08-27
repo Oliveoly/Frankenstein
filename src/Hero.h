@@ -16,6 +16,7 @@ public:
 	void update_sprite();
 	void attack();
 	void receive_damage(int damage);
+	
 	int get_modif();
 
 private:
@@ -39,6 +40,7 @@ private:
 		Dash,
 		Attack
 	};
+
 	FSM::Fsm<States, States::Normal, Triggers> fsm;	
 	int modif = 0;
 };

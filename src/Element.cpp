@@ -22,3 +22,8 @@ void Element::action()
 {
 
 }
+
+void Element::destroy()
+{
+
+}

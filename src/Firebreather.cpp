@@ -3,6 +3,7 @@
 #include "Commandes.h"
 #include "Hero.h"
 #include "Fireball.h"
+#include "PowerUp.h"
 
 extern std::vector<Element*> elements;
 extern std::vector<Element*> new_elements;
@@ -48,7 +49,7 @@ void Firebreather::action()
     if (atkTimer.getElapsedTime().asSeconds() >= 3)
     {
         std::cout << "lancer fireball" << std::endl;
-        Fireball* fireball= new Fireball(get_x(), get_y(), anim.y);
+        Fireball* fireball = new Fireball(get_x(), get_y(), anim.y);
         new_elements.push_back(fireball); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
         atkTimer.restart();
     }
@@ -73,4 +74,10 @@ void Firebreather::action()
         buttonDown_.execute(*this, speed);
         break;
     }
+}
+
+void Firebreather::destroy()
+{
+    PowerUp* powerup = new PowerUp(get_x(), get_y());
+    new_elements.push_back(powerup);
 }

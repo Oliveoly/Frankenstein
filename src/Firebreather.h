@@ -10,6 +10,7 @@ public:
 	Firebreather(double x_init, double y_init, double size_init);
 	void update_sprite();
 	void action();
+	void destroy();
 
 
 private:

@@ -99,6 +99,7 @@ void Hero::handle_keyboard()
                 {
                     std::cout << "bonk !" << std::endl;
                     //Tuer l'ennemi
+                    (*it)->destroy();
                     elements.erase(it);
                     break;
                 }

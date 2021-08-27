@@ -20,6 +20,7 @@ public:
 	void set_y(float new_y) { collider.setPosition(cd::Vector2<float>(collider.getPosition().x, new_y)); };
 	virtual void update_sprite();
 	virtual void action();
+	virtual void destroy();
 	cd::CircleCollision get_collider() { return collider; }
 
 

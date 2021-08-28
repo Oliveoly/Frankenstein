@@ -3,8 +3,10 @@
 #include <conio.h>
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Commandes.h"
+#include "Iceball.h"
 
 extern std::vector<Element*> elements;
+extern std::vector<Element*> new_elements;
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
@@ -119,12 +121,34 @@ void Hero::handle_keyboard()
                     std::cout << "nom nom !" << std::endl;
                     //Appliquer un buff au perso, puis détruire le power-up et le retirer de la liste.
                     //TODO : différents buffs en fonction du power-up
-                    sprite.setColor(sf::Color::Green);
-                    speed += 1;
-                    modif++;
-                    elements.erase(it);
-                    break;
+                    if (test->type == "speed")
+                    {
+                        sprite.setColor(sf::Color::Green);
+                        speed += 1;
+                        modif++;
+                        elements.erase(it);
+                        break;
+                    }
+                    else if (test->type == "ice")
+                    {
+                        ice = true;
+                        modif++;
+                        elements.erase(it);
+                        break;
+                    }
+                    
                 }
+            }
+        }
+
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
+        {
+            if (ice && ice_timer.getElapsedTime().asMilliseconds() > 100)
+            {
+                std::cout << "iceball !" << std::endl;
+                Iceball* iceball = new Iceball(get_x(), get_y(), anim.y);
+                new_elements.push_back(iceball);
+                ice_timer.restart();
             }
         }
     }

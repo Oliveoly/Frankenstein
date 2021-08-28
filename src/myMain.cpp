@@ -32,8 +32,8 @@ int myMain()
     Walker green1(100, 100, 20);
     Walker green2(150, 100, 20);
     Firebreather red1(200, 200, 20);
-    PowerUp meat(100, 50);
-    PowerUp meat2(200, 50);
+    PowerUp meat(100, 50, "speed");
+    PowerUp meat2(200, 50, "speed");
     Freezer blue1(100, 300, 20);
 
     elements.push_back(&green1);

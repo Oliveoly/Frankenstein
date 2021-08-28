@@ -7,13 +7,17 @@
 #include "Element.h"
 
 
-class PowerUp : public Element
+class Iceball : public Element
 {
 public:
-	PowerUp(double x_init, double y_init, std::string type);
+	Iceball(double x_init, double y_init, int dir);
 	void update_sprite();
-	std::string type;
-	
+	void action();
+
 private:
-	
+	sf::Vector2i anim;
+	double move_x;
+	double move_y;
+	double speed = 4;
+
 };

@@ -43,5 +43,8 @@ private:
 
 	FSM::Fsm<States, States::Normal, Triggers> fsm;	
 	int modif = 0;
+
+	bool ice = false;
+	sf::Clock ice_timer;
 };
 

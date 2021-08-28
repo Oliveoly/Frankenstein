@@ -74,3 +74,9 @@ void Freezer::action()
     }
 
 }
+
+void Freezer::destroy()
+{
+    PowerUp* powerup = new PowerUp(get_x(), get_y(), "ice");
+    new_elements.push_back(powerup);
+}

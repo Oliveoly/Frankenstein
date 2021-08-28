@@ -24,6 +24,16 @@ void Ennemy::update_sprite()
 
 void Ennemy::move(double dir_x, double dir_y)
 {
+    if (frozen_timer.getElapsedTime().asSeconds() > 2.5)
+    {
+        frozen = false;
+        sprite.setColor(sf::Color::White);
+    }
+    if (frozen)
+    {
+        return;
+    }
+
     int old_x = get_x();
     int old_y = get_y();
 
@@ -62,4 +72,12 @@ void Ennemy::attack()
 void Ennemy::action()
 {
 
+}
+
+void Ennemy::freeze()
+{
+    std::cout << "frozen !" << std::endl;
+    frozen_timer.restart();
+    frozen = true;
+    sprite.setColor(sf::Color::Blue);
 }

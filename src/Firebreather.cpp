@@ -76,8 +76,3 @@ void Firebreather::action()
     }
 }
 
-void Firebreather::destroy()
-{
-    PowerUp* powerup = new PowerUp(get_x(), get_y());
-    new_elements.push_back(powerup);
-}

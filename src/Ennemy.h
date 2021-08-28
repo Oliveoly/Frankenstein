@@ -14,11 +14,13 @@ public:
 	void move(double x, double y); //gère le déplacement et les collisions
 	virtual void attack(); //gère l'attaque > appelé par action(), méthode à part pour clarifier le code
 	virtual void action(); //gère le comportement de l'ennemi en direct (propre à chaque ennemi)
+	void freeze();
 
 
 private:
 	double size;
-	
+	bool frozen = false;
+	sf::Clock frozen_timer;
 	sf::Clock dirTimer;
 
 

@@ -3,17 +3,15 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Hero.h"
 
-extern std::vector<Element*> elements;
+extern std::vector<std::unique_ptr<Element>> elements;
 
 Iceball::Iceball(double x, double y, int dir) : Element(x, y)
 {
 
-    if (!texture.loadFromFile("../../Ressources/iceball.png"))
-    {
-        std::cout << "Erreur lors du chargement de fireball.png" << std::endl;
-    }
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    solid = false;
+    texture = TextureManager::getTexture("iceball");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 64, anim.y * 32, 64, 32));
 
     switch (dir)
@@ -58,18 +56,30 @@ void Iceball::action()
 
     sprite.setPosition(get_x(), get_y());
 
-    std::vector<Element*>::iterator it;
+    /*std::vector<std::unique_ptr<Element>>::iterator it;
     it = elements.begin();
     while (it != elements.end())
     {
-        Ennemy* test = dynamic_cast<Ennemy*>(*it);
+        Ennemy* test = dynamic_cast<Ennemy*>(it->get());
         if (test && collider.intersects((*it)->get_collider()))
         {
-            std::cout << "bonk !" << std::endl;
+            std::cout << "freeze !" << std::endl;
             //Geler l'ennemi
             test->freeze();
         }
         it++;
+    }*/
+
+    std::vector<std::unique_ptr<Element>>::iterator it;
+    for (it = elements.begin(); it != elements.end(); ++it)
+    {
+        Ennemy* ennemy_ptr = dynamic_cast<Ennemy*>(it->get());
+        if (ennemy_ptr && collider.intersects(((*it)->get_collider())))
+        {
+            std::cout << "freeze !" << std::endl;
+            //Geler l'ennemi
+            ennemy_ptr->freeze();
+        }
     }
     
 }

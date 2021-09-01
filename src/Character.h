@@ -11,6 +11,7 @@ public:
 	virtual void attack() = 0;
 	int get_maxHP() { return maxHP; };
 	int get_currentHP() { return currentHP; };
+	virtual void receive_damage(int n) = 0;
 
 
 protected:

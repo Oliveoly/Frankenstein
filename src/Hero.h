@@ -11,7 +11,7 @@ class Hero : public Character
 {
 public:
 	Hero(double x_init, double y_init, double size_init);
-	void handle_keyboard();
+	void action();
 	void move(double x, double y);
 	void update_sprite();
 	void attack();

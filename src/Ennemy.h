@@ -15,9 +15,11 @@ public:
 	virtual void attack(); //gère l'attaque > appelé par action(), méthode à part pour clarifier le code
 	virtual void action(); //gère le comportement de l'ennemi en direct (propre à chaque ennemi)
 	void freeze();
+	void receive_damage(int n);
 
 
 private:
+	sf::Clock invincibility_timer;
 	double size;
 	bool frozen = false;
 	sf::Clock frozen_timer;

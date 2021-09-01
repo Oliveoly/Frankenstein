@@ -4,20 +4,17 @@
 #include "Hero.h"
 #include "Puddle.h"
 
-extern std::vector<Element*> elements;
-extern std::vector<Element*> new_elements;
+extern std::vector<std::unique_ptr<Element>> elements;
+extern std::vector<std::unique_ptr<Element>> new_elements;
 
 
 
 Freezer::Freezer(double x, double y, double size) : Ennemy(x, y, size)
 {
-    if (!texture.loadFromFile("../../Ressources/zombieBlue.png"))
-    {
-        std::cout << "Erreur lors du chargement de zombie.png" << std::endl;
-    }
     speed = 0.5;
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    texture = TextureManager::getTexture("freezer");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
     anim.x = 0;
     anim.y = Dir::Down;
@@ -46,8 +43,8 @@ void Freezer::action()
 
     if (atkTimer.getElapsedTime().asSeconds() >= 1)
     {
-        Puddle* puddle = new Puddle(get_x(), get_y());
-        new_elements.push_back(puddle);
+        std::unique_ptr<Puddle> puddle = std::make_unique<Puddle>(Puddle(get_x(), get_y()));
+        new_elements.push_back(std::move(puddle));
         atkTimer.restart();
     }
 
@@ -77,6 +74,7 @@ void Freezer::action()
 
 void Freezer::destroy()
 {
-    PowerUp* powerup = new PowerUp(get_x(), get_y(), "ice");
-    new_elements.push_back(powerup);
+    std::unique_ptr<PowerUp> powerup = std::make_unique<PowerUp>(PowerUp(10, 10, "ice")); //new PowerUp(get_x(), get_y(), "ice");
+    new_elements.push_back(std::move(powerup));
+    to_destroy = true;
 }

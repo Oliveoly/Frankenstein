@@ -3,17 +3,15 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Hero.h"
 
-extern Hero* frank_ptr;
+//extern std::unique_ptr<Hero> frank_ptr;
+extern std::vector<std::unique_ptr<Element>> elements;
 
 Fireball::Fireball(double x, double y, int dir) : Element(x, y)
 {
-
-    if (!texture.loadFromFile("../../Ressources/fireball.png"))
-    {
-        std::cout << "Erreur lors du chargement de fireball.png" << std::endl;
-    }
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    solid = false;
+    texture = TextureManager::getTexture("fireball");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 64, anim.y * 32, 64, 32));
 
     switch (dir)
@@ -58,11 +56,17 @@ void Fireball::action()
     
     sprite.setPosition(get_x(), get_y());
 
-    if (collider.intersects((frank_ptr->get_collider())))
+    std::vector<std::unique_ptr<Element>>::iterator it;
+    for (it = elements.begin(); it != elements.end(); ++it)
     {
-        std::cout << "collision fireball -> hero" << std::endl;
-        //
-        frank_ptr->receive_damage(1);
+        Character* chara_ptr = dynamic_cast<Character*>(it->get());
+        if (chara_ptr && collider.intersects(((*it)->get_collider())))
+        {
+            std::cout << "collision fireball -> character" << std::endl;
+            //
+            chara_ptr->receive_damage(1);
+        }
     }
+   
 }
 

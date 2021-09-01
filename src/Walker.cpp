@@ -5,13 +5,10 @@
 
 Walker::Walker(double x, double y, double size) : Ennemy(x, y, size)
 {
-    if (!texture.loadFromFile("../../Ressources/zombie.png"))
-    {
-        std::cout << "Erreur lors du chargement de zombie.png" << std::endl;
-    }
     speed = 1;
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    texture = TextureManager::getTexture("walker");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
     anim.x = 0;
     anim.y = Dir::Down;
@@ -59,4 +56,9 @@ void Walker::action()
         buttonDown_.execute(*this, speed);
         break;
     }
+}
+
+void Walker::destroy()
+{
+    to_destroy = true;
 }

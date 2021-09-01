@@ -7,41 +7,53 @@
 #include "Firebreather.h"
 #include "PowerUp.h"
 #include "Freezer.h"
+#include "TextureManager.h"
+
 
 //la liste des éléments du jeu : joueur, ennemis, power-ups, pièges...
-std::vector<Element*> elements;
+std::vector<std::unique_ptr<Element>> elements;
 //la liste des éléments créés lors d'une itération sur la liste ci-dessus
 //ils seront ajoutés à elements à la fin de l'itération, et new_elements est alors vidée
-std::vector<Element*> new_elements;
+std::vector<std::unique_ptr<Element>> new_elements;
 //largeur de la fenêtre
 int width = 1000;
 //hauteur de la fenêtre
 int height = 600;
 
-Hero* frank_ptr;
-
 int myMain()
 {
-    std::vector<Element*>::iterator it;
+    std::vector<std::unique_ptr<Element>>::iterator it;
 
     sf::Clock timer;
 
-    //éléments de jeu (héro, ennemis et power-ups)
-    Hero frank(0, 0, 20);
-    frank_ptr = &frank;
-    Walker green1(100, 100, 20);
-    Walker green2(150, 100, 20);
-    Firebreather red1(200, 200, 20);
-    PowerUp meat(100, 50, "speed");
-    PowerUp meat2(200, 50, "speed");
-    Freezer blue1(100, 300, 20);
+    //chargement des textures
+    TextureManager::loadTexture("puddle", "../../Ressources/puddle.png");
+    TextureManager::loadTexture("fireball", "../../Ressources/fireball.png");
+    TextureManager::loadTexture("meat", "../../Ressources/meat.png");
+    TextureManager::loadTexture("frozen_meat", "../../Ressources/frozen_meat.png");
+    TextureManager::loadTexture("firebreather", "../../Ressources/zombieRed.png");
+    TextureManager::loadTexture("freezer", "../../Ressources/zombieBlue.png");
+    TextureManager::loadTexture("hero", "../../Ressources/scientist.png");
+    TextureManager::loadTexture("iceball", "../../Ressources/iceball.png");
+    TextureManager::loadTexture("walker", "../../Ressources/zombie.png");
 
-    elements.push_back(&green1);
-    elements.push_back(&green2);
-    elements.push_back(&red1);
-    elements.push_back(&meat);
-    elements.push_back(&meat2);
-    elements.push_back(&blue1);
+    //éléments de jeu (héro, ennemis et power-ups)
+    std::unique_ptr<Hero> frank = std::make_unique<Hero>(500, 500, 20);
+    std::unique_ptr<Walker> green1 = std::make_unique<Walker>(100, 100, 20);
+    std::unique_ptr<Walker> green2 = std::make_unique<Walker>(150, 100, 20);
+    std::unique_ptr<Firebreather> red1 = std::make_unique<Firebreather>(200, 200, 20);
+    std::unique_ptr<PowerUp> meat1 = std::make_unique<PowerUp>(100, 50, "speed");
+    std::unique_ptr<PowerUp> meat2 = std::make_unique<PowerUp>(200, 50, "speed");
+    std::unique_ptr<Freezer> blue1 = std::make_unique<Freezer>(100, 50, 20);
+    
+    // /!\ on déplace les pointeurs dans le liste : ils ne sont plus accessibles individuellement !
+    elements.push_back(std::move(frank));
+    elements.push_back(std::move(green1));
+    elements.push_back(std::move(green2));
+    elements.push_back(std::move(red1));
+    elements.push_back(std::move(meat1));
+    elements.push_back(std::move(meat2));
+    elements.push_back(std::move(blue1));
 
     //textes
     sf::Font font;
@@ -81,20 +93,23 @@ int myMain()
         }
 
         //gestion du comportement du joueur et des ennemis
-        frank.handle_keyboard();
+        //frank_ptr->handle_keyboard();
         for (it = elements.begin(); it != elements.end(); it++)
         {
             (*it)->action();
         }
 
+        elements.erase(std::remove_if(elements.begin(), elements.end(), [](const std::unique_ptr<Element> &e) {return e->get_to_destroy(); }), elements.end());
+
         //ajout des nouveaux éléments créés lors de la boucle précédente à la liste elements
-        elements.insert(elements.end(), new_elements.begin(), new_elements.end());
+        //elements.insert(elements.end(), new_elements.begin(), new_elements.end());
+        std::move(new_elements.begin(), new_elements.end(), std::back_inserter(elements));
         new_elements.clear();
 
         //mise à jour des sprites : passage à la prochaine frame toutes les 250ms
         if (timer.getElapsedTime().asMilliseconds() >= 250)
         {
-            frank.update_sprite();
+            //frank->update_sprite();
             for (it = elements.begin(); it != elements.end(); it++)
             {
                 (*it)->update_sprite();
@@ -103,16 +118,17 @@ int myMain()
         }
         
         //affichage des sprites après mise à jour de leur frame/position
-        app.draw(frank.get_sprite());
+        //app.draw(frank->get_sprite());
         for (it = elements.begin(); it != elements.end(); it++)
         {
             app.draw((*it)->get_sprite());
         }
 
         //affichage des éléments textuels
-        text_HP.setString(std::to_string(std::max(frank.get_currentHP(), 0)) + "/" + std::to_string(frank.get_maxHP()));
-        text_danger.setString("monstrification : " + std::to_string(frank.get_modif()) + " / 10");
-        if (frank.get_currentHP()<=0) {
+        // frank est un nullptr !!! j'ai mis "1" en attendant de trouver une solution
+        text_HP.setString(std::to_string(std::max(1, 0)) + "/" + std::to_string(1));
+        text_danger.setString("monstrification : " + std::to_string(1) + " / 10");
+        if (1<=0) {
             text_GameOver.setString("Vous etes mort!");
         }
         app.draw(text_HP);

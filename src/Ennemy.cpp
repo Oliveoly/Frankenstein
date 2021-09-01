@@ -3,8 +3,8 @@
 #include "Commandes.h"
 #include "Hero.h"
 
-extern Hero* frank_ptr;
-extern std::vector<Element*> elements;
+//extern std::unique_ptr<Hero> frank_ptr;
+extern std::vector<std::unique_ptr<Element>> elements;
 
 Ennemy::Ennemy(double x, double y, double size) : Character(x, y), size{ size }
 {
@@ -42,24 +42,28 @@ void Ennemy::move(double dir_x, double dir_y)
     // 0 < y + dir_y < 600
     set_y(std::min((double)height, std::max(0.0, get_y() + dir_y)));
 
-    if (collider.intersects((frank_ptr->get_collider())))
-    {
-        std::cout << "collision zombie -> hero" << std::endl;
-        set_x(old_x);
-        set_y(old_y);
-        frank_ptr->receive_damage(1);
-    }
-    
-    std::vector<Element*>::iterator it;
+    std::vector<std::unique_ptr<Element>>::iterator it;
     for (it = elements.begin(); it != elements.end(); ++it)
     {
-        //on vérifie que l'ennemi ne rentre dans aucun autre ennemi (différent de lui-même)
-        Ennemy* test = dynamic_cast<Ennemy*>(*it);
-        if (test && collider.intersects((*it)->get_collider()) && (this != (*it)))
+        //s'il y a collision...
+        if (collider.intersects((*it)->get_collider()) && (this != it->get()) )
         {
-            std::cout << "collision zombie -> zombie" << std::endl;
-            set_x(old_x);
-            set_y(old_y);
+            //...avec frank
+            Hero* frank_ptr = dynamic_cast<Hero*>(it->get()); 
+            if(frank_ptr) //si ce n'est pas un Hero, le dynamic_cast echoue et le test vaut false
+            {
+                std::cout << "collision zombie -> hero" << std::endl;
+                set_x(old_x);
+                set_y(old_y);
+                frank_ptr->receive_damage(1);
+            }
+            //...ou avec un objet solide
+            else if ((*it)->get_solid() && collider.intersects((*it)->get_collider()) && (this != it->get()))
+            {
+                std::cout << "collision zombie -> zombie" << std::endl;
+                set_x(old_x);
+                set_y(old_y);
+            }
         }
     }
 }
@@ -80,4 +84,17 @@ void Ennemy::freeze()
     frozen_timer.restart();
     frozen = true;
     sprite.setColor(sf::Color::Blue);
+}
+
+void Ennemy::receive_damage(int n)
+{
+    if (invincibility_timer.getElapsedTime().asMilliseconds() > 1000)
+    {
+        currentHP -= n;
+        invincibility_timer.restart();
+        if (currentHP <= 0) 
+        {
+            to_destroy = true;
+        }
+    }
 }

@@ -13,6 +13,7 @@ public:
 	PowerUp(double x_init, double y_init, std::string type);
 	void update_sprite();
 	std::string type;
+	void destroy();
 	
 private:
 	

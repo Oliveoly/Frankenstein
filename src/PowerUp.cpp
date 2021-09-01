@@ -8,21 +8,15 @@ PowerUp::PowerUp(double x, double y, std::string t) : Element(x, y)
 
     if (type == "speed")
     {
-        if (!texture.loadFromFile("../../Ressources/meat.png"))
-        {
-            std::cout << "Erreur lors du chargement de meat.png" << std::endl;
-        }
+        texture = TextureManager::getTexture("meat");
     }
     else if (type == "ice")
     {
-        if (!texture.loadFromFile("../../Ressources/frozen_meat.png"))
-        {
-            std::cout << "Erreur lors du chargement de meat.png" << std::endl;
-        }
+        texture = TextureManager::getTexture("frozen_meat");
     }
-    
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    solid = false;
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
 };
 
 void PowerUp::update_sprite()
@@ -30,3 +24,7 @@ void PowerUp::update_sprite()
     sprite.setPosition(get_x(), get_y());
 }
 
+void PowerUp::destroy()
+{
+    to_destroy = true;
+}

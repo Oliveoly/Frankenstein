@@ -5,20 +5,17 @@
 #include "Fireball.h"
 #include "PowerUp.h"
 
-extern std::vector<Element*> elements;
-extern std::vector<Element*> new_elements;
+extern std::vector<std::unique_ptr<Element>> elements;
+extern std::vector<std::unique_ptr<Element>> new_elements;
 
 
 
 Firebreather::Firebreather(double x, double y, double size) : Ennemy(x, y, size)
 {
-    if (!texture.loadFromFile("../../Ressources/zombieRed.png"))
-    {
-        std::cout << "Erreur lors du chargement de zombie.png" << std::endl;
-    }
     speed = 0.5;
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    texture = TextureManager::getTexture("firebreather");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
     anim.x = 0;
     anim.y = Dir::Down;
@@ -49,8 +46,8 @@ void Firebreather::action()
     if (atkTimer.getElapsedTime().asSeconds() >= 3)
     {
         std::cout << "lancer fireball" << std::endl;
-        Fireball* fireball = new Fireball(get_x(), get_y(), anim.y);
-        new_elements.push_back(fireball); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
+        std::unique_ptr<Fireball> fireball = std::make_unique<Fireball>(Fireball(get_x(), get_y(), anim.y));
+        new_elements.push_back(std::move(fireball)); //les éléments créés ne peuvent être ajouté directement dans le liste elements car elle est en train d'être parcourue
         atkTimer.restart();
     }
 
@@ -76,3 +73,7 @@ void Firebreather::action()
     }
 }
 
+void Firebreather::destroy()
+{
+    to_destroy = true;
+}

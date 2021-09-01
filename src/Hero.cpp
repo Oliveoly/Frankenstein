@@ -5,19 +5,16 @@
 #include "Commandes.h"
 #include "Iceball.h"
 
-extern std::vector<Element*> elements;
-extern std::vector<Element*> new_elements;
+extern std::vector<std::unique_ptr<Element>> elements;
+extern std::vector<std::unique_ptr<Element>> new_elements;
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
-    if (!texture.loadFromFile("../../Ressources/scientist.png"))
-    {
-        std::cout << "Erreur lors du chargement de perso.png" << std::endl;
-    }
     maxHP = 15;
     currentHP = 15;
-    texture.setSmooth(true);
-    sprite.setTexture(texture);
+    texture = TextureManager::getTexture("hero");
+    texture->setSmooth(true);
+    sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
 
     fsm.add_transitions(
@@ -37,10 +34,10 @@ void Hero::move(double dir_x, double dir_y)
     // 0 < y + dir_y < 600
     set_y( std::min((double)height, std::max(0.0, get_y() + dir_y)) );
 
-    std::vector<Element*>::iterator it;
+    std::vector<std::unique_ptr<Element>>::iterator it;
     for (it = elements.begin(); it != elements.end(); ++it)
     {
-        Ennemy* test = dynamic_cast<Ennemy*>(*it);
+        Ennemy* test = dynamic_cast<Ennemy*>(it->get());
         if (test && collider.intersects((*it)->get_collider()))
         {
             std::cout << "collision hero -> zombie" << std::endl;
@@ -56,7 +53,7 @@ void Hero::move(double dir_x, double dir_y)
     
 }
 
-void Hero::handle_keyboard()
+void Hero::action()
 {
     if (currentHP > 0) {
         sprite.setPosition(get_x(), get_y());
@@ -92,17 +89,16 @@ void Hero::handle_keyboard()
         {
             //buttonAttack_->execute(*this, speed);
             cd::CircleCollision attack_area = cd::CircleCollision(cd::Vector2<float>(get_x(), get_y()), 50.f);
-            std::vector<Element*>::iterator it;
+            std::vector<std::unique_ptr<Element>>::iterator it;
             it = elements.begin();
             while (it != elements.end())
             {
-                Ennemy* test = dynamic_cast<Ennemy*>(*it);
+                Ennemy* test = dynamic_cast<Ennemy*>(it->get());
                 if (test && attack_area.intersects((*it)->get_collider()))
                 {
                     std::cout << "bonk !" << std::endl;
                     //Tuer l'ennemi
                     (*it)->destroy();
-                    elements.erase(it);
                     break;
                 }
                 it++;
@@ -112,10 +108,11 @@ void Hero::handle_keyboard()
 
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
-            std::vector<Element*>::iterator it;
+            std::vector<std::unique_ptr<Element>>::iterator it;
             for (it = elements.begin(); it != elements.end(); ++it)
             {
-                PowerUp* test = dynamic_cast<PowerUp*>(*it);
+                
+                PowerUp* test = dynamic_cast<PowerUp*>(it->get());
                 if (test && collider.intersects((*it)->get_collider()))
                 {
                     std::cout << "nom nom !" << std::endl;
@@ -126,14 +123,14 @@ void Hero::handle_keyboard()
                         sprite.setColor(sf::Color::Green);
                         speed += 1;
                         modif++;
-                        elements.erase(it);
+                        (*it)->destroy();
                         break;
                     }
                     else if (test->type == "ice")
                     {
                         ice = true;
                         modif++;
-                        elements.erase(it);
+                        (*it)->destroy();
                         break;
                     }
                     
@@ -146,8 +143,8 @@ void Hero::handle_keyboard()
             if (ice && ice_timer.getElapsedTime().asMilliseconds() > 100)
             {
                 std::cout << "iceball !" << std::endl;
-                Iceball* iceball = new Iceball(get_x(), get_y(), anim.y);
-                new_elements.push_back(iceball);
+                std::unique_ptr<Iceball> iceball = std::make_unique<Iceball>(Iceball(get_x(), get_y(), anim.y));
+                new_elements.push_back(std::move(iceball));
                 ice_timer.restart();
             }
         }

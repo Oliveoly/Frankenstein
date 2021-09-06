@@ -50,6 +50,12 @@ void Iceball::update_sprite()
 
 void Iceball::action()
 {
+    if (lifetimer.getElapsedTime().asSeconds() > 3)
+    {
+        to_destroy = true;
+        return;
+    }
+
     //se déplacer dans la bonne direction
     set_x(get_x() + move_x);
     set_y(get_y() + move_y);
@@ -79,6 +85,7 @@ void Iceball::action()
             std::cout << "freeze !" << std::endl;
             //Geler l'ennemi
             ennemy_ptr->freeze();
+            to_destroy = true;
         }
     }
     

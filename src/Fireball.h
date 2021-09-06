@@ -19,5 +19,5 @@ private:
 	double move_x;
 	double move_y;
 	double speed = 4;
-
+	sf::Clock lifetimer;
 };

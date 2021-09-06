@@ -34,6 +34,12 @@ void Puddle::action()
     }
     */
 
+    if (lifetimer.getElapsedTime().asSeconds() > 3)
+    {
+        to_destroy = true;
+        return;
+    }
+
     std::vector<std::unique_ptr<Element>>::iterator it;
     for (it = elements.begin(); it != elements.end(); ++it)
     {

@@ -50,6 +50,12 @@ void Fireball::update_sprite()
 
 void Fireball::action()
 {
+    if (lifetimer.getElapsedTime().asSeconds() > 3)
+    {
+        to_destroy = true;
+        return;
+    }
+
     //se déplacer dans la bonne direction
     set_x(get_x() + move_x);
     set_y(get_y() + move_y);
@@ -65,6 +71,7 @@ void Fireball::action()
             std::cout << "collision fireball -> character" << std::endl;
             //
             chara_ptr->receive_damage(1);
+            to_destroy = true;
         }
     }
    

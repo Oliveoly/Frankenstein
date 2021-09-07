@@ -52,7 +52,7 @@ void Ennemy::move(double dir_x, double dir_y)
             Hero* frank_ptr = dynamic_cast<Hero*>(it->get()); 
             if(frank_ptr) //si ce n'est pas un Hero, le dynamic_cast echoue et le test vaut false
             {
-                std::cout << "collision zombie -> hero" << std::endl;
+                //std::cout << "collision zombie -> hero" << std::endl;
                 set_x(old_x);
                 set_y(old_y);
                 frank_ptr->receive_damage(1);
@@ -60,7 +60,7 @@ void Ennemy::move(double dir_x, double dir_y)
             //...ou avec un objet solide
             else if ((*it)->get_solid() && collider.intersects((*it)->get_collider()) && (this != it->get()))
             {
-                std::cout << "collision zombie -> zombie" << std::endl;
+                //std::cout << "collision zombie -> zombie" << std::endl;
                 set_x(old_x);
                 set_y(old_y);
             }
@@ -94,7 +94,7 @@ void Ennemy::receive_damage(int n)
         invincibility_timer.restart();
         if (currentHP <= 0) 
         {
-            to_destroy = true;
+            destroy();
         }
     }
 }

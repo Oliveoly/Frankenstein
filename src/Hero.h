@@ -6,6 +6,7 @@
 #include "PowerUp.h"
 #include "Character.h"
 #include "fsm.h"
+#include "SpecialAttack.h"
 
 class Hero : public Character
 {
@@ -44,7 +45,6 @@ private:
 	FSM::Fsm<States, States::Normal, Triggers> fsm;	
 	int modif = 0;
 
-	bool ice = false;
-	sf::Clock ice_timer;
+	std::unique_ptr<SpecialAttack> special;
 };
 

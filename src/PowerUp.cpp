@@ -14,6 +14,10 @@ PowerUp::PowerUp(double x, double y, std::string t) : Element(x, y)
     {
         texture = TextureManager::getTexture("frozen_meat");
     }
+    else if (type == "fire")
+    {
+        texture = TextureManager::getTexture("fire_meat");
+    }
     solid = false;
     texture->setSmooth(true);
     sprite.setTexture(*texture);

@@ -31,6 +31,7 @@ int myMain()
     TextureManager::loadTexture("fireball", "../../Ressources/fireball.png");
     TextureManager::loadTexture("meat", "../../Ressources/meat.png");
     TextureManager::loadTexture("frozen_meat", "../../Ressources/frozen_meat.png");
+    TextureManager::loadTexture("fire_meat", "../../Ressources/fire_meat.png");
     TextureManager::loadTexture("firebreather", "../../Ressources/zombieRed.png");
     TextureManager::loadTexture("freezer", "../../Ressources/zombieBlue.png");
     TextureManager::loadTexture("hero", "../../Ressources/scientist.png");

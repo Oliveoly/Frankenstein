@@ -4,6 +4,9 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Commandes.h"
 #include "Iceball.h"
+#include "Special_None.h"
+#include "Special_Ice.h"
+#include "Special_Fire.h"
 
 extern std::vector<std::unique_ptr<Element>> elements;
 extern std::vector<std::unique_ptr<Element>> new_elements;
@@ -16,6 +19,8 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
     texture->setSmooth(true);
     sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
+
+    special = std::make_unique<Special_None>();
 
     fsm.add_transitions(
         {
@@ -40,7 +45,7 @@ void Hero::move(double dir_x, double dir_y)
         Ennemy* test = dynamic_cast<Ennemy*>(it->get());
         if (test && collider.intersects((*it)->get_collider()))
         {
-            std::cout << "collision hero -> zombie" << std::endl;
+            //std::cout << "collision hero -> zombie" << std::endl;
             //Prendre des dégâts, et devenir invincible pendant quelques secondes.
             set_x(old_x);
             set_y(old_y);
@@ -57,6 +62,11 @@ void Hero::action()
 {
     if (currentHP > 0) {
         sprite.setPosition(get_x(), get_y());
+
+        if ( (special->get_buff_duration() != 0) && (special->get_Timer().getElapsedTime().asSeconds() > special->get_buff_duration()) )
+        {
+            special = std::make_unique<Special_None>();
+        }
 
         MoveUpCommand buttonUp_;
         MoveDownCommand buttonDown_;
@@ -93,12 +103,12 @@ void Hero::action()
             it = elements.begin();
             while (it != elements.end())
             {
-                Ennemy* test = dynamic_cast<Ennemy*>(it->get());
-                if (test && attack_area.intersects((*it)->get_collider()))
+                Ennemy* ennemt_ptr = dynamic_cast<Ennemy*>(it->get());
+                if (ennemt_ptr && attack_area.intersects((*it)->get_collider()))
                 {
                     std::cout << "bonk !" << std::endl;
                     //Tuer l'ennemi
-                    (*it)->destroy();
+                    ennemt_ptr->receive_damage(1);
                     break;
                 }
                 it++;
@@ -128,25 +138,25 @@ void Hero::action()
                     }
                     else if (test->type == "ice")
                     {
-                        ice = true;
+                        special = std::make_unique<Special_Ice>();
                         modif++;
                         (*it)->destroy();
                         break;
                     }
-                    
+                    else if (test->type == "fire")
+                    {
+                        special = std::make_unique<Special_Fire>();
+                        modif++;
+                        (*it)->destroy();
+                        break;
+                    }
                 }
             }
         }
 
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab))
         {
-            if (ice && ice_timer.getElapsedTime().asMilliseconds() > 100)
-            {
-                std::cout << "iceball !" << std::endl;
-                std::unique_ptr<Iceball> iceball = std::make_unique<Iceball>(Iceball(get_x(), get_y(), anim.y));
-                new_elements.push_back(std::move(iceball));
-                ice_timer.restart();
-            }
+            special->action(get_x(), get_y(), anim.y);
         }
     }
     

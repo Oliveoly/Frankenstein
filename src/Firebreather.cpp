@@ -75,5 +75,7 @@ void Firebreather::action()
 
 void Firebreather::destroy()
 {
+    std::unique_ptr<PowerUp> powerup = std::make_unique<PowerUp>(PowerUp(get_x(), get_y(), "fire")); //new PowerUp(get_x(), get_y(), "ice");
+    new_elements.push_back(std::move(powerup));
     to_destroy = true;
 }

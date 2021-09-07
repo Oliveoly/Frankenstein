@@ -14,9 +14,9 @@ public:
 	void move(double x, double y); //gère le déplacement et les collisions
 	virtual void attack(); //gère l'attaque > appelé par action(), méthode à part pour clarifier le code
 	virtual void action(); //gère le comportement de l'ennemi en direct (propre à chaque ennemi)
+	virtual void destroy() = 0;
 	void freeze();
 	void receive_damage(int n);
-
 
 private:
 	sf::Clock invincibility_timer;

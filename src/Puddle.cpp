@@ -14,6 +14,7 @@ Puddle::Puddle(double x, double y) : Element(x, y)
     sprite.setTexture(*texture);
     sprite.setPosition(get_x(), get_y());
     sprite.setTextureRect(sf::IntRect(anim.x * 100, anim.y * 31, 100, 31));
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 
 };
 

@@ -5,11 +5,13 @@
 
 Walker::Walker(double x, double y, double size) : Ennemy(x, y, size)
 {
-    speed = 1;
+    collider.setSize(cd::Vector2<float>(30.0, 30.0));
+    speed = 0;
     texture = TextureManager::getTexture("walker");
     texture->setSmooth(true);
     sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
     anim.x = 0;
     anim.y = Dir::Down;
     maxHP = 100;

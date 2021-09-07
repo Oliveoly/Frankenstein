@@ -23,14 +23,14 @@ public:
 	virtual void update_sprite();
 	virtual void action();
 	virtual void destroy();
-	cd::CircleCollision get_collider() { return collider; };
+	cd::AABBCollision get_collider() { return collider; };
 	bool get_solid() { return solid; };
 	bool get_to_destroy() { return to_destroy; };
 
 protected:
 	sf::Texture* texture;
 	sf::Sprite sprite;
-	cd::CircleCollision collider = cd::CircleCollision(cd::Vector2<float>(0, 0), 10.f);
+	cd::AABBCollision collider = cd::AABBCollision();
 	bool to_destroy = false;
 	bool solid = true;
 };

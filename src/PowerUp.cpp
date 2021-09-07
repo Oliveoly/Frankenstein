@@ -21,6 +21,7 @@ PowerUp::PowerUp(double x, double y, std::string t) : Element(x, y)
     solid = false;
     texture->setSmooth(true);
     sprite.setTexture(*texture);
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 };
 
 void PowerUp::update_sprite()

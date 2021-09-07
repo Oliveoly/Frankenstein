@@ -13,12 +13,14 @@ extern std::vector<std::unique_ptr<Element>> new_elements;
 
 Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 {
+    collider.setSize(cd::Vector2<float>(30.0, 30.0));
     maxHP = 15;
     currentHP = 15;
     texture = TextureManager::getTexture("hero");
     texture->setSmooth(true);
     sprite.setTexture(*texture);
-    sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 48, 32, 48));
+    sprite.setTextureRect(sf::IntRect(anim.x * 48, anim.y * 48, 48, 48));
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 
     special = std::make_unique<Special_None>();
 

@@ -10,7 +10,7 @@ extern std::vector<std::unique_ptr<Element>> new_elements;
 class Special_Fire : public SpecialAttack
 {
 public:
-    Special_Fire() { buff_duration = 3; };
+    Special_Fire() { buff_duration = 5; };
     void action(float x, float y, int dir)
     {
         if (reload_timer.getElapsedTime().asMilliseconds() > 100)

@@ -3,37 +3,42 @@
 #include <../Collider2D/include/CollisionDetection.hpp>
 #include "Hero.h"
 
-//extern std::unique_ptr<Hero> frank_ptr;
 extern std::vector<std::unique_ptr<Element>> elements;
 
 Fireball::Fireball(double x, double y, int dir) : Element(x, y)
 {
+    collider.setSize(cd::Vector2<float>(30.0, 15.0));
     solid = false;
     texture = TextureManager::getTexture("fireball");
     texture->setSmooth(true);
     sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 64, anim.y * 32, 64, 32));
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
 
     switch (dir)
     {
     case 0: //Down
         move_x = 0;
         move_y = speed;
+        set_y(y + 27);
         sprite.rotate(90);
         break;
     case 1: //Left
         move_x = -speed;
         move_y = 0;
         sprite.rotate(180);
+        set_x(x - 27);
         break;
     case 2: //Right
         move_x = speed;
         move_y = 0;
+        set_x(x + 27);
         break;
     case 3: //Up
         move_x = 0;
         move_y = -speed;
         sprite.rotate(-90);
+        set_y(y - 27);
         break;
     }
 

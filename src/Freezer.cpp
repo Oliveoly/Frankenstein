@@ -11,11 +11,13 @@ extern std::vector<std::unique_ptr<Element>> new_elements;
 
 Freezer::Freezer(double x, double y, double size) : Ennemy(x, y, size)
 {
+    collider.setSize(cd::Vector2<float>(30.0, 30.0));
     speed = 0.5;
     texture = TextureManager::getTexture("freezer");
     texture->setSmooth(true);
     sprite.setTexture(*texture);
     sprite.setTextureRect(sf::IntRect(anim.x * 32, anim.y * 64, 32, 64));
+    sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2);
     anim.x = 0;
     anim.y = Dir::Down;
     maxHP = 100;

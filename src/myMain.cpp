@@ -77,7 +77,6 @@ int myMain()
     text_GameOver.setFillColor(sf::Color::White);
     text_GameOver.setPosition(350, 350);
     
-    
 
     sf::RenderWindow app(sf::VideoMode(width, height), "Frankenstein");
     app.setFramerateLimit(60);

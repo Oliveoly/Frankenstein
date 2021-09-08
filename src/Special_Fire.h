@@ -13,7 +13,7 @@ public:
     Special_Fire() { buff_duration = 5; };
     void action(float x, float y, int dir)
     {
-        if (reload_timer.getElapsedTime().asMilliseconds() > 100)
+        if (reload_timer.getElapsedTime().asMilliseconds() > 1000)
         {
             std::cout << "fireball !" << std::endl;
             auto fireball = std::make_unique<Fireball>(Fireball(x, y, dir));

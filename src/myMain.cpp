@@ -40,6 +40,7 @@ int myMain()
 
     //éléments de jeu (héro, ennemis et power-ups)
     std::unique_ptr<Hero> frank = std::make_unique<Hero>(500, 500, 20);
+    Hero const* frank_ptr = frank.get();
     std::unique_ptr<Walker> green1 = std::make_unique<Walker>(100, 100, 20);
     std::unique_ptr<Walker> green2 = std::make_unique<Walker>(150, 100, 20);
     std::unique_ptr<Firebreather> red1 = std::make_unique<Firebreather>(200, 200, 20);
@@ -93,7 +94,6 @@ int myMain()
         }
 
         //gestion du comportement du joueur et des ennemis
-        //frank_ptr->handle_keyboard();
         for (it = elements.begin(); it != elements.end(); it++)
         {
             (*it)->action();
@@ -102,7 +102,6 @@ int myMain()
         elements.erase(std::remove_if(elements.begin(), elements.end(), [](const std::unique_ptr<Element> &e) {return e->get_to_destroy(); }), elements.end());
 
         //ajout des nouveaux éléments créés lors de la boucle précédente à la liste elements
-        //elements.insert(elements.end(), new_elements.begin(), new_elements.end());
         std::move(new_elements.begin(), new_elements.end(), std::back_inserter(elements));
         new_elements.clear();
 
@@ -118,18 +117,16 @@ int myMain()
         }
         
         //affichage des sprites après mise à jour de leur frame/position
-        //app.draw(frank->get_sprite());
         for (it = elements.begin(); it != elements.end(); it++)
         {
             app.draw((*it)->get_sprite());
         }
 
         //affichage des éléments textuels
-        // frank est un nullptr !!! j'ai mis "1" en attendant de trouver une solution
-        text_HP.setString(std::to_string(std::max(1, 0)) + "/" + std::to_string(1));
-        text_danger.setString("monstrification : " + std::to_string(1) + " / 10");
-        if (1<=0) {
-            text_GameOver.setString("Vous etes mort!");
+        text_HP.setString(std::to_string(std::max(frank_ptr->get_currentHP(), 0)) + "/" + std::to_string(frank_ptr->get_maxHP()));
+        text_danger.setString("monstrification : " + std::to_string(frank_ptr->get_modif()) + " / 10");
+        if ( (frank_ptr->get_currentHP() <=0) || (frank_ptr->get_modif() >= 10) ) {
+            text_GameOver.setString("GAME OVER");
         }
         app.draw(text_HP);
         app.draw(text_danger);

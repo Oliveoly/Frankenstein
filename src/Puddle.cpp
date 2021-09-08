@@ -8,6 +8,7 @@ extern std::vector<std::unique_ptr<Element>> elements;
 
 Puddle::Puddle(double x, double y) : Element(x, y)
 {
+    collider.setSize(cd::Vector2<float>(100.0, 20.0));
     solid = false;
     texture = TextureManager::getTexture("puddle");
     texture->setSmooth(true);
@@ -26,15 +27,6 @@ void Puddle::update_sprite()
 
 void Puddle::action()
 {
-    /*
-    if (collider.intersects((frank_ptr->get_collider())))
-    {
-        std::cout << "collision puddle -> hero" << std::endl;
-        //
-        frank_ptr->receive_damage(1);
-    }
-    */
-
     if (lifetimer.getElapsedTime().asSeconds() > 3)
     {
         to_destroy = true;
@@ -53,4 +45,3 @@ void Puddle::action()
         }
     }
 }
-

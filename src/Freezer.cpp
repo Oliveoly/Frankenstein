@@ -43,7 +43,7 @@ void Freezer::action()
         dirTimer.restart();
     }
 
-    if (atkTimer.getElapsedTime().asSeconds() >= 1)
+    if (atkTimer.getElapsedTime().asSeconds() >= 0.5)
     {
         std::unique_ptr<Puddle> puddle = std::make_unique<Puddle>(Puddle(get_x(), get_y()));
         new_elements.push_back(std::move(puddle));

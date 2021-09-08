@@ -6,7 +6,7 @@
 Walker::Walker(double x, double y, double size) : Ennemy(x, y, size)
 {
     collider.setSize(cd::Vector2<float>(30.0, 30.0));
-    speed = 0;
+    speed = 1.5;
     texture = TextureManager::getTexture("walker");
     texture->setSmooth(true);
     sprite.setTexture(*texture);

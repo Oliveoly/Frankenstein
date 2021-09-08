@@ -18,7 +18,7 @@ public:
 	void attack();
 	void receive_damage(int damage);
 	
-	int get_modif();
+	int get_modif() const { return modif; };
 
 private:
 	double size;

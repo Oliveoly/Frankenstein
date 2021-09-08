@@ -220,10 +220,3 @@ void Hero::receive_damage(int damage)
     }
     
 }
-
-
-
-int Hero::get_modif()
-{
-    return modif;
-}

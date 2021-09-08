@@ -13,7 +13,7 @@ public:
     Special_Ice() { buff_duration = 10; };
 	void action(float x, float y, int dir)
 	{
-        if (reload_timer.getElapsedTime().asMilliseconds() > 100)
+        if (reload_timer.getElapsedTime().asMilliseconds() > 500)
         {
             std::cout << "iceball !" << std::endl;
             auto iceball = std::make_unique<Iceball>(Iceball(x, y, dir));

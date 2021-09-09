@@ -35,6 +35,11 @@ int myMain()
     TextureManager::loadTexture("firebreather", "../../Ressources/zombieRed.png");
     TextureManager::loadTexture("freezer", "../../Ressources/zombieBlue.png");
     TextureManager::loadTexture("hero", "../../Ressources/scientist.png");
+    TextureManager::loadTexture("hero_fire", "../../Ressources/scientist_fire.png");
+    TextureManager::loadTexture("hero_ice", "../../Ressources/scientist_ice.png");
+    TextureManager::loadTexture("hero_speed", "../../Ressources/scientist_speed.png");
+    TextureManager::loadTexture("hero_zombie", "../../Ressources/scientist_zombie.png");
+    TextureManager::loadTexture("hero_dead", "../../Ressources/scientist_dead.png");
     TextureManager::loadTexture("iceball", "../../Ressources/iceball.png");
     TextureManager::loadTexture("walker", "../../Ressources/zombie.png");
 
@@ -125,7 +130,7 @@ int myMain()
         //affichage des éléments textuels
         text_HP.setString(std::to_string(std::max(frank_ptr->get_currentHP(), 0)) + "/" + std::to_string(frank_ptr->get_maxHP()));
         text_danger.setString("monstrification : " + std::to_string(frank_ptr->get_modif()) + " / 10");
-        if ( (frank_ptr->get_currentHP() <=0) || (frank_ptr->get_modif() >= 10) ) {
+        if ( (frank_ptr->get_currentHP() <=0) || (frank_ptr->get_modif() >= 2) ) {
             text_GameOver.setString("GAME OVER");
         }
         app.draw(text_HP);

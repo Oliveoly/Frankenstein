@@ -17,6 +17,7 @@ public:
 	void update_sprite();
 	void attack();
 	void receive_damage(int damage);
+	void increase_modif(int n);
 	
 	int get_modif() const { return modif; };
 
@@ -26,17 +27,23 @@ private:
 	void switch_anim(int id);
 	enum Anim
 	{
-		Attacking
+		Attacking,
+		Dead,
+		Zombie
 	};
 	enum class States 
 	{ 
 		Normal,
+		Dead,
+		Zombie,
 		Attacking,
 		Recovering,
 		Dashing
 	};
 	enum class Triggers 
 	{
+		Dies,
+		Transform,
 		GetHit,
 		Dash,
 		Attack

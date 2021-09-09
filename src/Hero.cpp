@@ -26,8 +26,10 @@ Hero::Hero(double x, double y, double size) : Character(x, y), size{ size }
 
     fsm.add_transitions(
         {
-            //  from state	  ,to state			    ,triggers			,guard						,action
-            { States::Normal  ,States::Attacking	,Triggers::Attack	,[this] {return true; }		,[this] { switch_anim(Anim::Attacking); } }
+            //  from state	  ,to state			    ,triggers			    ,guard						,action
+            { States::Normal  ,States::Attacking	,Triggers::Attack	    ,[this] {return true; }		,[this] { switch_anim(Anim::Attacking); } },
+            { States::Normal  ,States::Dead     	,Triggers::Dies 	    ,[this] {return true; }		,[this] { texture = TextureManager::getTexture("hero_dead"); sprite.setTexture(*texture); } },
+            { States::Normal  ,States::Zombie   	,Triggers::Transform	,[this] {return true; }		,[this] { texture = TextureManager::getTexture("hero_zombie"); sprite.setTexture(*texture); } }
         });
 };
 
@@ -67,6 +69,8 @@ void Hero::action()
 
         if ( (special->get_buff_duration() != 0) && (special->get_Timer().getElapsedTime().asSeconds() > special->get_buff_duration()) )
         {
+            texture = TextureManager::getTexture("hero");
+            sprite.setTexture(*texture);
             special = std::make_unique<Special_None>();
         }
 
@@ -132,23 +136,28 @@ void Hero::action()
                     //TODO : différents buffs en fonction du power-up
                     if (test->type == "speed")
                     {
-                        sprite.setColor(sf::Color::Green);
                         speed += 1;
-                        modif++;
+                        texture = TextureManager::getTexture("hero_speed");
+                        sprite.setTexture(*texture);
+                        increase_modif(1);
                         (*it)->destroy();
                         break;
                     }
                     else if (test->type == "ice")
                     {
                         special = std::make_unique<Special_Ice>();
-                        modif++;
+                        texture = TextureManager::getTexture("hero_ice");
+                        sprite.setTexture(*texture);
+                        increase_modif(1);
                         (*it)->destroy();
                         break;
                     }
                     else if (test->type == "fire")
                     {
                         special = std::make_unique<Special_Fire>();
-                        modif++;
+                        texture = TextureManager::getTexture("hero_fire");
+                        sprite.setTexture(*texture);
+                        increase_modif(1);
                         (*it)->destroy();
                         break;
                     }
@@ -166,8 +175,16 @@ void Hero::action()
 
 void Hero::update_sprite()
 {
-    anim.x = (anim.x + 1) % 3;
-    sprite.setTextureRect(sf::IntRect(anim.x * 48, anim.y * 48, 48, 48));
+    switch (fsm.state())
+    {
+    case States::Dead:
+        break;
+    default:
+        anim.x = (anim.x + 1) % 3;
+        sprite.setTextureRect(sf::IntRect(anim.x * 48, anim.y * 48, 48, 48));
+        break;
+    }
+    
 }
 
 void Hero::switch_anim(int id)
@@ -212,11 +229,20 @@ void Hero::receive_damage(int damage)
     {
         currentHP -= damage;
         invincibility_timer.restart();
-        if (currentHP<=0) {
-            
-        std::cout << "GameOver" << std::endl;
-        
+        if (currentHP<=0)
+        {
+            fsm.execute(Triggers::Dies);
+            //std::cout << "GameOver" << std::endl;
         }
     }
     
+}
+
+void Hero::increase_modif(int n)
+{
+    modif += n;
+    if (modif >= 2)
+    {
+        fsm.execute(Triggers::Transform);
+    }
 }
